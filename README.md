@@ -56,6 +56,40 @@ terraform apply
   - Go implementation works fine
     - It could be more consistent with methods receivers that are sometime pointers and sometimes values
 
+- [rag](rag)
+  - Building RAG search on crate documentation I had problem with
+    - When using `crate.client` python package throws error and cratedb search in documentation is not helpful
+      ```
+      Removed server https://localhost:4200 from active pool
+      ```
+    - SQLAlchemy and pandas works fine...
+    - `crash` CLI also works fine...
+  - A quite flustrating expirence I had with fulltext search
+    ```
+    CREATE TABLE IF NOT EXISTS "doc"."docs_3" (
+      "title" TEXT,
+      "url" TEXT,
+      "html" TEXT INDEX USING FULLTEXT WITH (
+        analyzer = 'english'
+      )
+    )
+    ```
+    This is SQL that I RUN
+    ```
+    select d.* 
+    from doc.docs_3 as d
+    where match("d"."html" , "find me crate")
+    limit 100;
+    ```
+    I get error:
+    ```
+    io.crate.exceptions.ColumnUnknownException: Column find me crate unknown 
+    ```
+    Where error should be something along the lines use `'` maybe you want to use single quotes?
+  
+  - Suggestion to AdminUI, allow binding params in SQL queries, so I can use `?` instead of `find me crate`
+
+
 ## Bugs?
 
 - I sent invitation to new user, and when I clicked on link in email it shows me "Invitation not found or expired." message.
@@ -84,3 +118,5 @@ terraform apply
 
 ## Other
 - What are limits of scalability?
+
+
