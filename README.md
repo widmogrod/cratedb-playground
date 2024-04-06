@@ -89,6 +89,35 @@ terraform apply
   
   - Suggestion to AdminUI, allow binding params in SQL queries, so I can use `?` instead of `find me crate`
 
+  - RAG observations
+    - FAISS index and OpenAI build baseline for RAG search
+    - I was positively suppressed how well it works and how it help me better navigate through Crate documentation
+    - There are few queries like "give me latest blog posts/updates" RAG fails, because it does not have time update in index. 
+      - Adding query pre-processing with "self-querying" retriever could help to introduce features like "sort" documents by date, or filter docs by some fields like "type:blog" or "type:news" etc.
+    - Experimenting with Mistral-7B and sentence_transformers as replacement for commential solutions,
+      shows very BAD results.
+      - I haven't done any formal analysis, but reading through answers, there are few problems. 
+        - Small context window " Requested tokens (552) exceed context window of 512"
+        - Poor instruction following, etc.
+      - Slow execution is also an problem
+    - Experimenting with CrateDB and fulltext, where I store whole documents (without chunking) + using Mistral-7B show very unsatisfactory results
+      - I decided to chunk documents and do fulltext index on them. 
+        - [3.crate_retriver.ipynb](rag%2F3.crate_retriver.ipynb)]
+      - CrateDB in Docker with 3 instances took forever to index this data. FAISS was MUCH faster.
+        - I decided to implement dedicated Crate Vectorstore [crate.py](rag%2Fvectorstore%2Fcrate.py)
+          It significantly improved performance, although it revealed that there is not easy way to do bach insert in CrateDB (requires REST api)
+      - Chunked results got better, but I notice that either RAG.
+    - Rank fusion experiment. 
+      - Crate Vectorstore allows to for changing retrival methods from fulltext search to knn, which allows for next experiment relate to rank fusion.
+      - I decided to use FAISS and fulltext search to retrive documents and then rank them using Borda count.
+        - [4.rank_fusion.ipynb](rag%2F4.rank_fusion.ipynb)
+      - Results look good, but not different when using semantic search.
+        Overall, it at least help to verify implementation.
+      - Funny enough I wanted to find if CrateDB offers fusion search (it does not, according to my searches)
+      - And whe I ask RAG to find answer to question:
+        "How to do fusion search and connect vector search with fulltext search"
+        It got it wrong.
+
 
 ## Bugs?
 
