@@ -3,15 +3,18 @@ from typing import Type, List, Optional, Any, Iterable
 from langchain_community.utilities.sql_database import SQLDatabase
 from langchain_core.documents import Document
 from langchain_core.embeddings import Embeddings
-from langchain_core.vectorstores import VectorStore, VST, VectorStoreRetriever
+from langchain_core.vectorstores import VectorStore, VST
 
 DEFAULT_TABLE_NAME = "embeddings"
 
 
 class CrateVectorStore(VectorStore):
-    def __init__(self, embeddings: Embeddings, db: SQLDatabase, table_name: str = None, drop_if_exists: bool = False):
+    def __init__(self,
+                 embeddings: Embeddings,
+                 db: SQLDatabase,
+                 table_name: str = None,
+                 drop_if_exists: bool = False):
         self._vector_size = None
-
         self._embeddings = embeddings
         self._db = db
 
@@ -66,18 +69,64 @@ class CrateVectorStore(VectorStore):
         self._db.run(command=f"REFRESH TABLE {self._table_name}")
 
     def similarity_search(self, query: str, k: int = 4, **kwargs: Any) -> List[Document]:
-        results = self._db.run(
-            command=f"""
-                SELECT page_content, metadata
-                FROM {self._table_name}
-                WHERE knn_match(embeddings, :embedding, :k)
-            """,
-            parameters={
-                "embedding": self._embeddings.embed_query(query),
-                "k": k,
-            },
-            fetch="cursor",
-        )
+        """
+        Perform a similarity search on the vector store.
+
+        You can pass in as_retriever() kwargs that allow you to parametrise search
+
+        - "algorithm": Literal["knn", "fulltext"]. Default is "knn".
+
+        Example:
+
+                >>> vectorstore = CrateVectorStore(
+                >>>     embeddings=OpenAIEmbeddings(),
+                >>>     db=SQLDatabase.from_uri(database_uri="crate://localhost:4200"),
+                >>> )
+                >>> retriever = vectorstore.as_retriever(
+                >>>     search_kwargs={'k': 10, "algorith": "fulltext"}
+                >>> )
+
+        """
+
+        k = kwargs.get("k", k)
+        fetch_k = kwargs.get("fetch_k", k)
+
+        switch = kwargs.get("algorithm", "knn")
+        if switch == "knn":
+            results = self._db.run(
+                command=f"""
+                    SELECT page_content, metadata
+                    FROM {self._table_name}
+                    WHERE knn_match(embeddings, :embedding, :fetch_k)
+                    ORDER BY _score DESC
+                    LIMIT :k
+                """,
+                parameters={
+                    "embedding": self._embeddings.embed_query(query),
+                    "fetch_k": fetch_k,
+                    "k": k,
+                },
+                fetch="cursor",
+            )
+
+        elif switch == "fulltext":
+            results = self._db.run(
+                command=f"""
+                    SELECT page_content, metadata
+                    FROM {self._table_name}
+                    WHERE match(page_content, :query)
+                    ORDER BY _score DESC
+                    LIMIT :k
+                """,
+                parameters={
+                    "query": query,
+                    "k": k,
+                },
+                fetch="cursor",
+            )
+
+        else:
+            raise ValueError(f"Unknown algorithm: {switch}")
 
         return [Document(page_content=result[0], metadata=result[1]) for result in results]
 
@@ -113,5 +162,3 @@ class CrateVectorStore(VectorStore):
         vectorstore = cls(embeddings=embedding, db=db, **kwargs.get("vectorstore_kwargs", {}))
         vectorstore.add_texts(texts, metadatas, **kwargs)
         return vectorstore
-
-
