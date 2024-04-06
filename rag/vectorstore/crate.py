@@ -1,4 +1,4 @@
-from typing import Type, List, Optional, Any, Iterable
+from typing import Type, List, Optional, Any, Iterable, Dict
 
 from langchain_community.utilities.sql_database import SQLDatabase
 from langchain_core.documents import Document
@@ -45,27 +45,56 @@ class CrateVectorStore(VectorStore):
         )
 
     def add_texts(self, texts: Iterable[str], metadatas: Optional[List[dict]] = None, **kwargs: Any) -> List[str]:
-        # TODO add bulk insert
-
+        batch_size = max(1, kwargs.get("batch_size", 1000))
         embeddings = self._embeddings.embed_documents(texts=texts)
+
+        index = 0
+        parameters = {}
+        values_bindings = []
         for text in texts:
+            # prepare data for batch insert
             metadata = metadatas.pop(0) if metadatas else {}
             embedding = embeddings.pop(0)
 
-            cursor = self._db.run(
-                command=f"""
-                    INSERT INTO {self._table_name}(page_content, embeddings, metadata) 
-                    VALUES (:page_content, :embeddings, :metadata)
-                """,
-                parameters={
-                    "page_content": text,
-                    "embeddings": embedding,
-                    "metadata": metadata,
-                },
-                fetch="cursor",
-            )
-            cursor.close()
+            key_1 = f"page_content_{index}"
+            key_2 = f"embeddings_{index}"
+            key_3 = f"metadata_{index}"
 
+            parameters[key_1] = text
+            parameters[key_2] = embedding
+            parameters[key_3] = metadata
+
+            values_bindings.append(f"(:{key_1}, :{key_2}, :{key_3})")
+
+            index += 1
+            # insert batch when we reach the batch size
+            if index == batch_size:
+                self._insert_batch(parameters, values_bindings)
+                index = 0
+                parameters = {}
+                values_bindings = []
+
+        # insert the remaining batch
+        if index > 0:
+            self._insert_batch(parameters, values_bindings)
+
+        # refresh crate table, to have data immediately available for search
+        self._refresh_table()
+
+    def _insert_batch(self, parameters: Optional[Dict[str, Any]], values_bindings: List[str] = None):
+        into = ", ".join(values_bindings)
+
+        cursor = self._db.run(
+            command=f"""
+                INSERT INTO {self._table_name}(page_content, embeddings, metadata) 
+                VALUES {into}
+            """,
+            parameters=parameters,
+            fetch="cursor",
+        )
+        cursor.close()
+
+    def _refresh_table(self):
         self._db.run(command=f"REFRESH TABLE {self._table_name}")
 
     def similarity_search(self, query: str, k: int = 4, **kwargs: Any) -> List[Document]:
@@ -89,7 +118,7 @@ class CrateVectorStore(VectorStore):
         """
 
         k = kwargs.get("k", k)
-        fetch_k = kwargs.get("fetch_k", k)
+        fetch_k = max(kwargs.get("fetch_k", k), k)
 
         switch = kwargs.get("algorithm", "knn")
         if switch == "knn":
