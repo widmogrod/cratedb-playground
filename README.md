@@ -89,6 +89,23 @@ terraform apply
   
   - Suggestion to AdminUI, allow binding params in SQL queries, so I can use `?` instead of `find me crate`
 
+  - RAG observations
+    - FAISS index and OpenAI build baseline for RAG search
+    - I was positively suppressed how well it works and how it help me better navigate through Crate documentation
+    - There are few queries like "give me latest blog posts/updates" RAG fails, because it does not have time update in index. 
+      - Adding query pre-processing with "self-querying" retriever could help to introduce features like "sort" documents by date, or filter docs by some fields like "type:blog" or "type:news" etc.
+    - Experimenting with Mistral-7B and sentence_transformers as replacement for commential solutions,
+      shows very BAD results.
+      - I haven't done any formal analysis, but reading through answers, there are few problems. 
+        - Small context window " Requested tokens (552) exceed context window of 512"
+        - Poor instruction following, etc.
+      - Slow execution is also an problem
+    - Experimenting with CrateDB and fulltext index, where I store whole documents (without chunking) + using Mistral-7B show very unsatisfactory results
+      - I decided to chunk documents and do fulltext index on them. 
+        CrateDB in Docker with 3 instances took forever to index this data. FAISS was MUCH faster.
+      - Chincked results got better, but I notice that either RAG 
+      - 
+    
 
 ## Bugs?
 
