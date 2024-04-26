@@ -144,6 +144,9 @@ terraform apply
 - what and how BLOB tables work?
 - How AWS marketplace works, and why I cannot see deployment in my account?
 - How Cloud console
+- ```
+  WARNING: Java vector incubator module is not readable. For optimal vector performance, pass '--add-modules jdk.incubator.vector' to enable Vector API.
+  ```
 
 ## Other
 - What are limits of scalability?
