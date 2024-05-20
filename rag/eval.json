@@ -1,0 +1,2682 @@
+{
+  "metadata": {
+    "source_path": "Compare RAG search with CrateDB vector, fulltext, fusion and OpenAI",
+    "custom_fields_schema": []
+  },
+  "models": [
+    {
+      "name": "A"
+    },
+    {
+      "name": "B"
+    }
+  ],
+  "examples": [
+    {
+      "index": 0,
+      "input_text": "Write me example of using blobs?",
+      "tags": [
+        "Blob Usage"
+      ],
+      "output_text_a": "To use BLOBs in CrateDB, you first need to create a BLOB table using the Crate Shell. This table must be created before adding any BLOBs. Here is an example SQL statement to create a BLOB table:\n\n```\nsh$ crash -c \"create blob table myblobs clustered into 3 shards with (number_of_replicas=1)\"\n```\n\nOnce the BLOB table is created, you can upload a BLOB by issuing a PUT request. Here is an example of uploading a BLOB:\n\n```\nsh$ curl -isSX PUT '127.0.0.1:4200/_blobs/myblobs/4a756ca07e9487f482465a99e8286abc86ba4dc7' -d 'contents'\n```\n\nFor more information on using BLOBs in CrateDB, you can refer to the [official documentation](https://cratedb.com/blog/using-crate-as-a-blobstore).",
+      "output_text_b": "To upload a blob, you can issue a PUT request using a tool like curl. Here is an example:\n\n```\nsh$ curl -isSX PUT '127.0.0.1:4200/_blobs/myblobs/4a756ca07e9487f482465a99e8286abc86ba4dc7' -d 'contents' HTTP/1.1\n```\n\nYou can find more information on using Crate as a blobstore [here](https://cratedb.com/blog/using-crate-as-a-blobstore).",
+      "score": 1.5,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question. They both included runnable code and provided a link to the source of the information. However, Assistant A's response was more detailed and helpful as it not only provided the code to upload a blob but also included the code to create a blob table, which is a necessary step before uploading a blob. Therefore, Assistant A's response was more direct and complete in answering the user's question. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both assistants provide relevant, coherent, and helpful responses that directly answer the user's question. They both provide runnable code and reference the same source for further information. However, Assistant B's response is more detailed and grounded. It provides an additional step of creating a BLOB table before uploading a BLOB, which is a crucial piece of information for someone who is new to using BLOBs in CrateDB. Therefore, Assistant B's response is more comprehensive and useful. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Both assistants provided relevant and coherent responses to the user's question. They both provided runnable code and referenced the same source for further information. However, Assistant A's response was more detailed and helpful as it not only provided the code to upload a blob but also included the code to create a blob table, which is a necessary step before uploading a blob. Therefore, Assistant A's response was more direct and complete in answering the user's question. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and helpful responses. They both provided runnable code and referenced the source of their information. However, Assistant B provided a more detailed response by explaining the need to create a BLOB table before adding any BLOBs and providing the code to do so. This additional detail makes Assistant B's response more direct and helpful to the user. Therefore, Assistant B's response is superior. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Both assistants provide relevant and coherent responses to the user's question. They both provide runnable code and reference the same source for further information. However, Assistant A's response is more detailed and helpful as it includes the step of creating a BLOB table before uploading a BLOB, which is a necessary step that Assistant B omits. Therefore, Assistant A's response is more complete and directly answers the user's question better. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both assistants provide relevant and coherent responses that contain runnable code. They both also provide a reference to the source of the information. However, Assistant B's response is more detailed and helpful as it includes an additional step of creating a BLOB table before uploading a BLOB, which is a crucial step that Assistant A omitted. Therefore, Assistant B's response is more complete and provides more value to a software engineer looking for information on using blobs. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "Software engineer who is looking for information can copy and paste the code and it should work",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7647874664688068,
+            0.7332916272037397,
+            0.7705550824563614
+          ]
+        },
+        {
+          "rationale": "The answer is relevant to the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7783813946131865,
+            0.7778186142059524,
+            0.8768183398240148
+          ]
+        },
+        {
+          "rationale": "The answer links to the source of the information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7863665346146411,
+            0.7497948357468208,
+            0.8630212478940905
+          ]
+        },
+        {
+          "rationale": "The answer is coherent and makes sense",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7522703788083462,
+            0.761880239834368,
+            0.8553416500322922
+          ]
+        },
+        {
+          "rationale": "The answer is detailed and provides enough information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8479115021187057,
+            0.7563090288851056,
+            0.8537928826110911
+          ]
+        },
+        {
+          "rationale": "The answer is helpful and provides value",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7775276097455359,
+            0.7716336290122137,
+            0.8486875417099506
+          ]
+        },
+        {
+          "rationale": "The answer directly answers the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7684578920390149,
+            0.7547902612562366,
+            0.9661752193519281
+          ]
+        },
+        {
+          "rationale": "The answer contains code that can be copied and pasted",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7582418561647124,
+            0.7278829632793712,
+            0.8246710500946087
+          ]
+        },
+        {
+          "rationale": "The answer contains reference to the source in form of URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7711923350077402,
+            0.7300448070028118,
+            0.8217348901616565
+          ]
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "input_text": "How to use BLOB store in CrateDB? and what are the benefits?",
+      "tags": [
+        "Blob Store",
+        "CrateDB",
+        "Benefits"
+      ],
+      "output_text_a": "To use BLOB store in CrateDB, you can store binary large objects such as pictures, videos, or large unstructured files in a table that will be automatically sharded and replicated across your cluster. This ensures optimal distribution and efficient replication of these files across multiple nodes in a cluster. \n\nThe benefits of using CrateDB for BLOB storage include:\n- Automatic sharding and replication, saving datastore administration work\n- Consistent replication and sharding rules for both BLOBs and other data\n- Integration of BLOBs into CrateDB with a dedicated BLOB table for effective distribution across nodes\n- Scalability and improved performance through sharding and replication of BLOBs just like regular data\n\nSources:\n- [CrateDB Blob Data Features](https://cratedb.com/product/features/blob-data)\n- [Using Crate as a Blobstore Blog](https://cratedb.com/blog/using-crate-as-a-blobstore)",
+      "output_text_b": "To use BLOB store in CrateDB, you can store binary large objects (BLOBs) in a table which will be automatically sharded and replicated across the cluster. CrateDB treats BLOBs like regular data, ensuring their optimal distribution across multiple nodes in the cluster. \n\nBenefits of using BLOB store in CrateDB include:\n- Efficient replication and sharding of BLOBs similar to regular data\n- Simplified administration work due to automatic sharding and replication\n- Integration of a dedicated BLOB table to distribute binaries effectively across nodes\n- Improved scalability and performance by treating BLOBs like regular data\n\nSources:\n- [Using Crate as a Blobstore](https://cratedb.com/blog/using-crate-as-a-blobstore)\n- [CrateDB Features: Blob Data](https://cratedb.com/product/features/blob-data)",
+      "score": 0.0,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": 0.0,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and detailed responses to the user's question. They both explained how to use BLOB store in CrateDB and listed the benefits of using it. They also provided references to the source of their information. However, neither of them provided runnable code, which was one of the criteria for evaluation. Therefore, considering all the factors, it's a tie between the two assistants. They both provided equally good responses. \n\nFinal Verdict: [[C]]"
+        },
+        {
+          "is_flipped": true,
+          "score": -0.0,
+          "rationale": "Both assistants provided relevant, coherent, and detailed responses to the user's question. They both explained how to use BLOB store in CrateDB and listed the benefits of using it. They also provided references to the source of their information. However, neither of them provided runnable code, which was one of the criteria for evaluation. Despite this, both responses were direct, helpful, and grounded. Therefore, it's a tie between the two assistants. \n\nFinal Verdict: [[C]]"
+        },
+        {
+          "is_flipped": false,
+          "score": 0.0,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and detailed responses to the user's question. They both explained how to use BLOB store in CrateDB and listed the benefits of using it. They also provided references to the source of their information. However, neither of them provided runnable code, which was one of the criteria for evaluation. Despite this, both responses were direct, helpful, and grounded. Therefore, considering all the criteria, both assistants performed equally well. \n\nFinal Verdict: [[C]] for a tie."
+        },
+        {
+          "is_flipped": true,
+          "score": -0.0,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and detailed responses to the user's question. They both explained how to use BLOB store in CrateDB and listed the benefits of using it. They also provided references to the source of their information. However, neither of them provided runnable code that could be copied and pasted, which was one of the criteria for evaluation. Despite this, both responses were helpful and directly answered the user's question. Therefore, I would consider this a tie. \n\nFinal Verdict: [[C]]"
+        },
+        {
+          "is_flipped": false,
+          "score": 0.0,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and detailed responses to the user's question. They both explained how to use BLOB store in CrateDB and listed the benefits of using it. They also provided references to the source of their information. However, neither of them provided runnable code that the user could copy and paste, which was one of the criteria for evaluation. \n\nGiven that both assistants provided similar quality responses and neither fully met all the criteria, I would consider this a tie.\n\nFinal Verdict: [[C]]"
+        },
+        {
+          "is_flipped": true,
+          "score": -0.0,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and detailed responses to the user's question. They both explained how to use BLOB store in CrateDB and listed the benefits of using it. They also provided references to the source of their information. However, neither of them provided runnable code that the user could copy and paste, which was one of the criteria for evaluation. Despite this, both responses were helpful and directly answered the user's question. Therefore, I would consider this a tie. \n\nFinal Verdict: [[C]]"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "The answer is relevant to the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7783639369749266,
+            0.7778363965783741,
+            0.8768173110821089
+          ]
+        },
+        {
+          "rationale": "The answer is coherent and makes sense",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7522703788083462,
+            0.761880239834368,
+            0.8553416500322922
+          ]
+        },
+        {
+          "rationale": "The answer is detailed and provides enough information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8479842921964492,
+            0.7563478912554099,
+            0.8538042841426003
+          ]
+        },
+        {
+          "rationale": "The answer is helpful and provides value",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.777603165739545,
+            0.7716785900629007,
+            0.8483797266695803
+          ]
+        },
+        {
+          "rationale": "The answer directly answers the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7684578920390149,
+            0.7547902612562366,
+            0.9661752193519281
+          ]
+        },
+        {
+          "rationale": "The answer contains reference to the source in form of URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7711923350077402,
+            0.7300448070028118,
+            0.8217348901616565
+          ]
+        },
+        {
+          "rationale": "The answer contains code that can be copied and pasted",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7582418561647124,
+            0.7278829632793712,
+            0.8246710500946087
+          ]
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "input_text": "How to limit permissions?",
+      "tags": [
+        "Permissions"
+      ],
+      "output_text_a": "To limit permissions, it is recommended to restrict the permissions of CrateDB on the S3 to only the required extent. An IAM role is required, and an AWS guide provides instructions on how to create a policy using the CLI or AWS management console. Further, access to the snapshot in the S3 bucket needs to be restricted by setting specific policies. More information can be found [here](https://cratedb.com/docs/guide/install/cloud/aws/s3-setup.html).",
+      "output_text_b": "To limit permissions in AWS for CrateDB, it is recommended to restrict the permissions of CrateDB on the S3 to only the required extent. An IAM role is required, and you can create a policy offer using the CLI or the AWS management console. Access to the snapshot to the S3 bucket needs to be restricted as well. More detailed information on how to restrict permissions can be found in the AWS policy examples and the links provided in the source documentation: [CrateDB AWS Permissions Restriction](https://cratedb.com/docs/guide/install/cloud/aws/s3-setup.html)",
+      "score": -1.5,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question about limiting permissions. Both assistants provided a link to the source of their information, which is a guide on how to limit permissions for CrateDB on AWS S3. However, Assistant B's response was more detailed and helpful as it mentioned that the user can create a policy using the CLI or the AWS management console and also mentioned the need to restrict access to the snapshot in the S3 bucket. Therefore, Assistant B's response was more direct and provided more value to the user. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provide relevant, coherent, and helpful responses to the user's question about limiting permissions. They both reference the same source and provide a link to it, which is a good practice for grounding the information. However, neither of them provides runnable code, which is one of the criteria for this evaluation. \n\nAssistant A's response is slightly more detailed, as it mentions the AWS policy examples, which could be useful for the user. On the other hand, Assistant B's response is more direct and concise, which could be appreciated by some users. \n\nGiven the criteria for this evaluation, I would say that Assistant A's response is slightly better due to the additional detail provided. However, the difference is minimal and could be subjective depending on the user's preferences. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question about limiting permissions. Both assistants provided a link to the source of their information, which is a guide on how to limit permissions for CrateDB on AWS S3. However, Assistant B's response was slightly more detailed and helpful as it mentioned that the user can create a policy using the CLI or the AWS management console and also referred to AWS policy examples. Therefore, Assistant B's response was more direct and provided more value to the user. Neither assistant provided runnable code, but this was not necessary given the nature of the question. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both assistants provided relevant and coherent responses to the user's question about limiting permissions. They both referenced the same source and provided a link to it, which is helpful and provides value to the user. However, Assistant A's response was more detailed and direct, explaining that the user needs to restrict CrateDB's permissions on S3 and that an IAM role is required. Assistant B's response was less direct and detailed, simply stating that it's recommended to restrict permissions and that an IAM role is required. Neither assistant provided runnable code, but this was not necessary given the nature of the question. Therefore, based on the criteria provided, Assistant A provided a better response. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question about limiting permissions. Both assistants provided a link to the source of their information, which is the CrateDB documentation on AWS permissions restriction. However, Assistant B's response was more detailed and helpful as it specifically mentioned AWS and CrateDB, which provides more context to the user. Assistant B also mentioned the AWS policy examples, which could be useful for the user. Neither assistant provided runnable code, but this is not necessarily a requirement for this particular question. Therefore, based on the criteria provided, Assistant B provided a better response. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question about limiting permissions. Both assistants provided a link to the source of their information, which is the CrateDB documentation on AWS permissions restriction. However, Assistant A's response is slightly more detailed and direct, as it specifically mentions that the user needs to restrict access to the snapshot in the S3 bucket, while Assistant B only vaguely mentions setting specific policies. Neither assistant provided runnable code, but this is not necessarily a requirement for this particular question. Based on these considerations, I would say that Assistant A provided a slightly better response. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "Assistant A provided a slightly more detailed and direct response to the user's question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8191271183868153,
+            0.7725992993753281,
+            0.850239078488607
+          ]
+        },
+        {
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7773060856792109,
+            0.7622392829332655,
+            0.8295672593119244
+          ]
+        },
+        {
+          "rationale": "Both Assistant A and Assistant B provided responses grounded in the CrateDB documentation on AWS permissions restriction",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7352611780157051,
+            0.7178566302086359,
+            0.7633528299825769
+          ]
+        },
+        {
+          "rationale": "Assistant A's response was slightly more direct in addressing the user's question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7867219028905598,
+            0.7738048613821835,
+            0.8552323238829995
+          ]
+        },
+        {
+          "rationale": "Both Assistant A and Assistant B provided helpful responses to the user's question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7751621492216787,
+            0.7495644874987347,
+            0.818901352941982
+          ]
+        },
+        {
+          "rationale": "Both Assistant A and Assistant B provided coherent responses to the user's question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7724185874997409,
+            0.7558225539955841,
+            0.8303562991162661
+          ]
+        },
+        {
+          "rationale": "Assistant A's response did not contain runnable code, but this was not a requirement for the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7610250490189766,
+            0.7352951935860437,
+            0.7932162628622956
+          ]
+        },
+        {
+          "rationale": "Neither Assistant A nor Assistant B provided code that can be copied and pasted",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7544477267790088,
+            0.7349168876138261,
+            0.7622768446084823
+          ]
+        },
+        {
+          "rationale": "Assistant A's response contained a reference to the source in the form of a URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7670110557144035,
+            0.7355251563039871,
+            0.7946501572743745
+          ]
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "input_text": "How AWS marketplace works, and why I cannot see deployment in my account?",
+      "tags": [
+        "AWS Marketplace",
+        "Deployment"
+      ],
+      "output_text_a": "To deploy a cluster on CrateDB Cloud using AWS Marketplace, you need to sign up via AWS Marketplace and have an AWS Marketplace account. The usage is billed directly by Amazon, not by Crate.io. It may take up to 10 minutes for the subscription to be confirmed and usable in the CrateDB Cloud console. If you cannot see the deployment in your account, you may need to unsubscribe from the AWS Marketplace offer by logging into your AWS Marketplace account and selecting Your Marketplace Software from the dropdown menu. For more information, you can refer to the source [here](https://cratedb.com/docs/cloud/en/latest/tutorials/deploy/marketplace/subscribe-aws.html#signup-aws-to-cluster) and [here](https://cratedb.com/docs/cloud/en/latest/howtos/delete-cluster.html).",
+      "output_text_b": "To deploy a cluster on CrateDB Cloud via AWS Marketplace, you need to sign up for an AWS Marketplace account. Your hourly usage will be billed directly by Amazon, not by Crate.io. It can take up to 10 minutes for the subscription to be confirmed and usable in the CrateDB Cloud console. If you cannot see the deployment in your account, you may need to unsubscribe from the AWS Marketplace offer by logging into the AWS Marketplace website with the account used to subscribe to the offer and accessing Your Marketplace Software in the dropdown menu. \n\nSources: \n- [CrateDB Cloud AWS Marketplace Tutorial](https://cratedb.com/docs/cloud/en/latest/tutorials/deploy/marketplace/subscribe-aws.html)\n- [Deleting a Cluster via AWS Marketplace](https://cratedb.com/docs/cloud/en/latest/howtos/delete-cluster.html)",
+      "score": -1.0,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provide relevant, coherent, and detailed responses to the user's question. They both provide runnable instructions and reference the source of their information with URLs. However, Assistant B's response is slightly more helpful and direct as it provides a clearer explanation of why the user might not be seeing the deployment in their account. Assistant B specifically mentions that the user needs to log into the AWS Marketplace website with the account used to subscribe to the offer, which is a crucial detail that Assistant A omits. Therefore, Assistant B's response is more helpful and direct. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and detailed responses to the user's question. They both explained how AWS Marketplace works and why the user might not be seeing the deployment in their account. Both assistants also provided links to the source of their information, which is helpful for the user if they want to read more about the topic. However, Assistant A's response was more direct and clear in its explanation, making it easier for the user to understand. Therefore, Assistant A's response is slightly better. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and detailed responses to the user's question. They both explained how AWS Marketplace works and why the user might not be seeing their deployment. They also both provided links to the source of their information, which is helpful and grounds their responses in reliable information. However, Assistant B's response was slightly more detailed and clear, particularly in explaining that the user needs to log into the AWS Marketplace website with the account used to subscribe to the offer. This additional detail could be crucial for the user in resolving their issue. Therefore, Assistant B's response is slightly better. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and detailed responses to the user's question. They both explained the process of deploying a cluster on CrateDB Cloud via AWS Marketplace and provided a possible solution to the user's issue of not seeing the deployment in their account. Both assistants also provided links to the source of their information, which is helpful for the user to get more detailed information. However, Assistant A's response was more direct and clear in explaining the process and the possible solution to the user's problem. Therefore, Assistant A's response is slightly better. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and detailed responses to the user's question. They both provided runnable instructions and referenced the source of their information. However, Assistant B's response was slightly more helpful and direct, as it clarified that the user needs to log into the AWS Marketplace website with the account used to subscribe to the offer, which could be the reason why the user cannot see the deployment in their account. Therefore, Assistant B's response was more helpful and direct in answering the user's question.\n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and detailed responses to the user's question. They both explained how AWS Marketplace works and why the user might not be seeing their deployment. They also both provided links to the source of their information, which meets the 'grounded' and 'reference' criteria. However, neither response included runnable code, which was one of the evaluation criteria. \n\nThe main difference between the two responses is that Assistant B provided a slightly more direct answer by specifying that the user needs to select 'Your Marketplace Software' from the dropdown menu in their AWS Marketplace account. This additional detail makes Assistant B's response slightly more helpful than Assistant A's. \n\nTherefore, my final verdict is: [[B]]",
+          "rating_label": "B"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "Software engineer who is looking for information can copy and paste the code and it should work",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7647874664688068,
+            0.7332916272037397,
+            0.7705550824563614
+          ]
+        },
+        {
+          "rationale": "The answer is relevant to the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7783639369749266,
+            0.7778363965783741,
+            0.8768173110821089
+          ]
+        },
+        {
+          "rationale": "The answer links to the source of the information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7863665346146411,
+            0.7497948357468208,
+            0.8630212478940905
+          ]
+        },
+        {
+          "rationale": "The answer is coherent and makes sense",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7522703788083462,
+            0.761880239834368,
+            0.8553416500322922
+          ]
+        },
+        {
+          "rationale": "The answer is detailed and provides enough information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8479842921964492,
+            0.7563478912554099,
+            0.8538042841426003
+          ]
+        },
+        {
+          "rationale": "The answer is helpful and provides value",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7775276097455359,
+            0.7716336290122137,
+            0.8486875417099506
+          ]
+        },
+        {
+          "rationale": "The answer directly answers the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7684578920390149,
+            0.7547902612562366,
+            0.9661752193519281
+          ]
+        },
+        {
+          "rationale": "The answer contains code that can be copied and pasted",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7582418561647124,
+            0.7278829632793712,
+            0.8246710500946087
+          ]
+        },
+        {
+          "rationale": "The answer contains reference to the source in form of URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7711923350077402,
+            0.7300448070028118,
+            0.8217348901616565
+          ]
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "input_text": "What are edge regions and how to use them?",
+      "tags": [
+        "Edge Regions",
+        "Usage"
+      ],
+      "output_text_a": "Edge regions are components of a deployed Edge Region that need to be updated regularly to continue receiving new features, bugfixes, and security updates. To use them, users can upgrade their Edge Regions by following the instructions provided in the CrateDB documentation, which may involve creating custom regions, deploying clusters in combination with existing cloud providers, and configuring necessary storage classes. More information can be found [here](https://cratedb.com/docs/cloud/en/latest/tutorials/edge/introduction.html#edge-disclaimer).",
+      "output_text_b": "Edge regions are components of a deployed Edge Region that are not updated automatically. Users should update their Edge Regions regularly to continue getting new features, bugfixes, and security updates. To use them, users can create custom regions by filling out a name for the region and clicking on the \"Create edge region\" button in the Regions tab of the CrateDB Cloud Console. Additionally, users can deploy CrateDB Edge in combination with an existing cloud provider by choosing a cloud provider from the fields provided and clicking \"Deploy cluster\" in the Regions tab. To deploy a cluster in a custom region, users can provide a name for the custom region and click the \"Create edge region\" button. More information can be found [here](https://cratedb.com/docs/cloud/en/latest/tutorials/edge/introduction.html#edge-disclaimer).",
+      "score": -1.5,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provide relevant and coherent answers to the question about edge regions. They both provide a link to the source of their information, which is a good reference for the user. However, Assistant B's answer is more detailed and helpful as it provides step-by-step instructions on how to use edge regions, including how to create custom regions and deploy clusters. This level of detail makes the answer more direct and useful for the user. Therefore, Assistant B's response is superior in this comparison. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provide relevant and coherent answers to the user's question about edge regions. They both link to the same source for further information, which satisfies the 'grounded' and 'reference' criteria. However, Assistant A provides a more detailed and direct answer, explaining how to create and deploy edge regions, which is more helpful for a user looking to understand how to use them. Assistant B, on the other hand, only mentions that users can upgrade their Edge Regions by following the instructions provided in the CrateDB documentation, without providing any specific steps. Therefore, Assistant A's response is more detailed and helpful. Neither assistant provided runnable code, but the question did not specifically ask for it. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both assistants provide a similar explanation of what edge regions are and how to use them. They both link to the same source for further information, which satisfies the 'grounded' and 'reference' criteria. However, Assistant B's response is more detailed and provides a step-by-step guide on how to use edge regions, which makes it more helpful and direct. Neither assistant provides runnable code, but this is not applicable as the user's question does not require a code-based answer. Therefore, based on the criteria provided, Assistant B's response is superior. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provide relevant and coherent answers to the question. They both explain what edge regions are and how to use them. They also both provide a link to the source of their information, which meets the 'grounded' and 'reference' criteria. However, Assistant A provides a more detailed and direct answer, explaining the steps to use edge regions, which makes it more helpful and runnable. Assistant B, on the other hand, only mentions that users can follow the instructions in the documentation without providing any specific steps. Therefore, Assistant A's response is superior in terms of detail, helpfulness, and directness. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both assistants provide a similar explanation of what edge regions are and how to use them. They both link to the same source for further information, which satisfies the 'reference' and 'grounded' criteria. However, Assistant B provides a more detailed step-by-step guide on how to use edge regions, including specific instructions on creating custom regions and deploying clusters. This makes Assistant B's response more 'runnable', 'detailed', 'helpful', and 'direct'. Therefore, Assistant B's response is superior in this comparison. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provide relevant and coherent answers to the question. They both explain what edge regions are and how to use them. They also both provide a link to the source of their information, which is a good reference for the user. However, Assistant A provides a more detailed and direct answer, explaining step-by-step how to create and deploy edge regions. Assistant B, on the other hand, only mentions that users can upgrade their edge regions by following the instructions in the documentation, without providing any specific steps. Therefore, Assistant A's answer is more helpful and detailed. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "The answer is detailed and provides enough information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8479842921964492,
+            0.7563478912554099,
+            0.8538042841426003
+          ]
+        },
+        {
+          "rationale": "The answer is helpful and provides value",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7775276097455359,
+            0.7716336290122137,
+            0.8486875417099506
+          ]
+        },
+        {
+          "rationale": "The answer directly answers the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7684578920390149,
+            0.7547902612562366,
+            0.9661752193519281
+          ]
+        },
+        {
+          "rationale": "The answer is coherent and makes sense",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7522703788083462,
+            0.761880239834368,
+            0.8553416500322922
+          ]
+        },
+        {
+          "rationale": "The answer links to the source of the information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7863665346146411,
+            0.7497948357468208,
+            0.8630212478940905
+          ]
+        },
+        {
+          "rationale": "The answer contains code that can be copied and pasted",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7582418561647124,
+            0.7278829632793712,
+            0.8246710500946087
+          ]
+        },
+        {
+          "rationale": "The answer is relevant to the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7783639369749266,
+            0.7778363965783741,
+            0.8768173110821089
+          ]
+        },
+        {
+          "rationale": "Software engineer who is looking for information can copy and paste the code and it should work",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7647874664688068,
+            0.7332916272037397,
+            0.7705550824563614
+          ]
+        },
+        {
+          "rationale": "The answer contains reference to the source in form of URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7711923350077402,
+            0.7300448070028118,
+            0.8217348901616565
+          ]
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "input_text": "What are recent blog posts about CrateDB?",
+      "tags": [
+        "CrateDB",
+        "Blog Posts"
+      ],
+      "output_text_a": "Recent blog posts about CrateDB include:\n1. [Distributed query execution in CrateDB: What you need to know](https://cratedb.com/blog/distributed-query-execution-in-cratedb-what-you-need-to-know)\n2. [Indexing and Storage in CrateDB](https://cratedb.com/product/features/lucene-engine)\n3. [CrateDB v4.6 is now stable and ready to use](https://cratedb.com/blog/cratedb-v4-6-is-now-stable-and-ready-to-use)\n4. [Setting up a small CrateDB cluster with Docker](https://cratedb.com/blog/author/richard-karn)",
+      "output_text_b": "Recent blog posts about CrateDB include topics such as distributed query execution, indexing and storage, writing operations, and setting up a CrateDB cluster with Docker. You can find more information on these topics on the [CrateDB blog](https://cratedb.com/blog/).",
+      "score": 1.5,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Assistant A provides a more detailed response by listing specific blog posts about CrateDB and linking directly to each one. This makes the response more helpful and direct. On the other hand, Assistant B provides a general overview of the topics covered in recent blog posts and only provides a link to the main blog page, which requires the user to search for the specific posts themselves. Therefore, Assistant A's response is more relevant, grounded, detailed, helpful, and direct. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both assistants provided relevant and coherent answers to the user's question. However, Assistant B's response was more detailed and helpful as it provided specific titles of recent blog posts about CrateDB and included direct links to these posts. This allows the user to directly access the information they are looking for. Assistant A, on the other hand, only provided a general overview of the topics covered in recent blog posts and a link to the main blog page, requiring the user to search for the posts themselves. Therefore, Assistant B's response is more direct and user-friendly. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Assistant A provides a more detailed and helpful response by listing specific blog posts about CrateDB and providing direct links to each of them. This makes it easier for the user to access the information they're looking for. On the other hand, Assistant B provides a more general response and only provides a link to the main blog page, which requires the user to search for the specific posts themselves. Therefore, Assistant A's response is more direct, detailed, and helpful. My final verdict is: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both assistants provided relevant and coherent answers to the user's question. However, Assistant B's response was more detailed and helpful as it provided direct links to the recent blog posts about CrateDB. This allows the user to directly access the information they are looking for. Assistant A, on the other hand, only provided a general link to the CrateDB blog without specifying any particular posts. Therefore, Assistant B's response is more direct and provides more value to the user. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Assistant A provides a more detailed and helpful response by listing specific blog posts about CrateDB and linking directly to them. This allows the user to directly access the information they're interested in. On the other hand, Assistant B provides a more general response and only provides a link to the main blog page, which requires the user to search for the specific posts themselves. Therefore, Assistant A's response is more direct, detailed, and helpful. My final verdict is: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both assistants provided relevant and coherent answers to the user's question. However, Assistant B's response was more detailed and helpful as it provided direct links to the recent blog posts about CrateDB. This allows the user to directly access the information they are looking for. Assistant A, on the other hand, only provided a general link to the CrateDB blog without specifying any particular posts. Therefore, Assistant B's response is more direct and provides more value to the user. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "The answer is detailed and provides enough information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8479842921964492,
+            0.7563478912554099,
+            0.8538042841426003
+          ]
+        },
+        {
+          "rationale": "The answer is helpful and provides value",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7775276097455359,
+            0.7716336290122137,
+            0.8486875417099506
+          ]
+        },
+        {
+          "rationale": "The answer links to the source of the information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7863665346146411,
+            0.7497948357468208,
+            0.8630212478940905
+          ]
+        },
+        {
+          "rationale": "The answer is coherent and makes sense",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7522703788083462,
+            0.761880239834368,
+            0.8553416500322922
+          ]
+        },
+        {
+          "rationale": "The answer is relevant to the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7783639369749266,
+            0.7778363965783741,
+            0.8768173110821089
+          ]
+        },
+        {
+          "rationale": "The answer is directly answers the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7634082175547403,
+            0.7547471937608887,
+            0.9630457626411253
+          ]
+        },
+        {
+          "rationale": "The answer contains reference to the source in form of URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7711077504661785,
+            0.729798625542047,
+            0.8211793595352965
+          ]
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "input_text": "Write me example python code to use CrateDB?",
+      "tags": [
+        "Python",
+        "CrateDB",
+        "Code Example"
+      ],
+      "output_text_a": "To write example python code to use CrateDB, you can refer to the CrateDB Python driver documentation at [https://cratedb.com/connect/python](https://cratedb.com/connect/python). Additionally, you can explore the examples provided in the documentation at [https://cratedb.com/docs/python/en/latest/by-example/index.html#by-example](https://cratedb.com/docs/python/en/latest/by-example/index.html#by-example) which detail different ways to interact with CrateDB using Python. \n\nYou can also check out the executable code examples maintained within the cratedb-examples repository, which demonstrate the use of the driver for various applications like a \"guestbook\" application. The documentation also includes code snippets on how to connect to CrateDB using pandas and how to load and export data. More details can be found at [https://cratedb.com/docs/python/en/latest/](https://cratedb.com/docs/python/en/latest/).\n\nIn summary, by referring to the official CrateDB Python driver documentation and the provided examples, you can easily write python code to interact with CrateDB.",
+      "output_text_b": "To use CrateDB with Python, you can refer to the official CrateDB Python driver documentation which provides examples on how to interact with CrateDB using different interfaces like DB API, HTTP, and BLOB. You can find the documentation [here](https://cratedb.com/docs/python/en/latest/by-example/index.html#by-example).\n\nAdditionally, you can explore the `cratedb-examples` repository which contains executable code examples demonstrating the use of the driver for different applications like a guestbook application, using CrateDB with pandas, Apache Superset, and FIWARE QuantumLeap data historian projects. The repository and corresponding documentation can be found [here](https://cratedb.com/docs/python/en/latest/).",
+      "score": 0.25,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": 0.0,
+          "rationale": "Both assistants provided relevant and coherent responses, directing the user to the official CrateDB Python driver documentation and the cratedb-examples repository. However, neither of them provided runnable code as per the user's request, which is a significant omission considering the user's criteria. \n\nAssistant A's response was more detailed, providing additional information about the types of examples available in the documentation, such as how to connect to CrateDB using pandas and how to load and export data. Assistant B, on the other hand, mentioned different interfaces like DB API, HTTP, and BLOB, and also mentioned the use of CrateDB with Apache Superset and FIWARE QuantumLeap data historian projects.\n\nBoth assistants provided references to the source of the information, but neither of them provided a direct answer to the user's question, which was to provide an example of Python code to use CrateDB.\n\nGiven the user's criteria and the responses provided by both assistants, it's a tie because neither assistant fully met the user's requirements. Therefore, the final verdict is [[C]]."
+        },
+        {
+          "is_flipped": true,
+          "score": -0.0,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses, and both referenced the official CrateDB Python driver documentation. However, neither assistant provided runnable code, which was one of the primary criteria for this evaluation. Both assistants were helpful and direct in their responses, providing detailed information and links to the source of the information. However, neither assistant provided a direct example of Python code to use CrateDB, which was the user's original question. Therefore, neither assistant fully met the user's needs. \n\nGiven these considerations, my final verdict is: [[C]] for a tie."
+        },
+        {
+          "is_flipped": false,
+          "score": 0.0,
+          "rationale": "Both Assistant A and Assistant B provided relevant and helpful responses to the user's question. They both directed the user to the official CrateDB Python driver documentation and mentioned the `cratedb-examples` repository. However, Assistant A provided a more detailed response, explaining that the documentation includes examples of how to connect to CrateDB using pandas and how to load and export data. Assistant B, on the other hand, mentioned additional interfaces and applications that can be used with CrateDB. Neither assistant provided runnable code, but both provided references to the source of the information. Both responses were coherent and direct. Therefore, it's a tie. \n\nFinal Verdict: [[C]]"
+        },
+        {
+          "is_flipped": true,
+          "score": -0.0,
+          "rationale": "Both assistants provided relevant and coherent responses, and both referenced the official CrateDB Python driver documentation as a source of information. However, neither assistant provided runnable Python code as requested by the user, which is a key criterion for this evaluation. Both assistants also failed to provide a detailed answer, instead directing the user to external resources. While these resources are undoubtedly helpful, the assistants could have provided more value by including a basic example of Python code for using CrateDB in their responses. Therefore, neither assistant fully met the user's needs in this case. \n\nFinal verdict: [[C]] for a tie."
+        },
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and helpful responses to the user's question. They both directed the user to the official CrateDB Python driver documentation and mentioned the `cratedb-examples` repository. However, Assistant A's response was more detailed and coherent, providing a more comprehensive overview of the resources available for writing Python code to use CrateDB. Assistant B's response, while also helpful, was less detailed and did not provide as much context or explanation. Therefore, Assistant A's response is superior in terms of detail, coherence, and helpfulness. However, neither assistant provided runnable code, which was one of the criteria mentioned. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": -0.0,
+          "rationale": "Both assistants provided relevant and coherent responses, and both referenced the official CrateDB Python driver documentation as a source of information. However, neither assistant provided a runnable Python code example as requested by the user, which is a significant omission given the user's request. Both assistants were helpful in directing the user to resources where they could find examples, but neither directly answered the user's question by providing a code example. Therefore, neither assistant fully met the criteria of helpfulness, directness, or providing code. \n\nGiven these considerations, my verdict is a tie because both assistants provided similar levels of detail and relevance, but neither provided a direct, runnable code example as requested by the user. \n\nFinal Verdict: [[C]]"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "The answer is relevant to the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7783639369749266,
+            0.7778363965783741,
+            0.8768173110821089
+          ]
+        },
+        {
+          "rationale": "The answer is coherent and makes sense",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7522703788083462,
+            0.761880239834368,
+            0.8553416500322922
+          ]
+        },
+        {
+          "rationale": "The answer links to the source of the information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7863665346146411,
+            0.7497948357468208,
+            0.8630212478940905
+          ]
+        },
+        {
+          "rationale": "The answer is detailed and provides enough information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8479842921964492,
+            0.7563478912554099,
+            0.8538042841426003
+          ]
+        },
+        {
+          "rationale": "The answer is helpful and provides value",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7775276097455359,
+            0.7716336290122137,
+            0.8486875417099506
+          ]
+        },
+        {
+          "rationale": "The answer directly answers the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7684578920390149,
+            0.7547902612562366,
+            0.9661752193519281
+          ]
+        },
+        {
+          "rationale": "The answer contains code that can be copied and pasted",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7582418561647124,
+            0.7278829632793712,
+            0.8246710500946087
+          ]
+        },
+        {
+          "rationale": "The answer contains reference to the source in form of URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7711923350077402,
+            0.7300448070028118,
+            0.8217348901616565
+          ]
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "input_text": "Write me example golang code to use CrateDB?",
+      "tags": [
+        "Golang",
+        "CrateDB",
+        "Code Example"
+      ],
+      "output_text_a": "To use CrateDB with Go, you can utilize the pgx driver. Here is an example of how you can connect to CrateDB using Go:\n\n```go\npackage main\n\nimport (\n\t\"context\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/jackc/pgx/v5\"\n)\n\nfunc main() {\n\tconn, err := pgx.Connect(context.Background(), \"postgresql://user:password@localhost:5432/database\")\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Unable to connect to database: %v\\n\", err)\n\t\tos.Exit(1)\n\t}\n\tdefer conn.Close(context.Background())\n\n\tvar id int\n\tvar name string\n\trows, err := conn.Query(context.Background(), \"SELECT id, name FROM your_table\")\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Query failed: %v\\n\", err)\n\t\tos.Exit(1)\n\t}\n\tdefer rows.Close()\n\n\tfor rows.Next() {\n\t\terr := rows.Scan(&id, &name)\n\t\tif err != nil {\n\t\t\tfmt.Fprintf(os.Stderr, \"Scan failed: %v\\n\", err)\n\t\t\tos.Exit(1)\n\t\t}\n\t\tfmt.Printf(\"ID: %d, Name: %s\\n\", id, name)\n\t}\n}\n```\n\nMake sure to replace `\"postgresql://user:password@localhost:5432/database\"` with your actual connection string. For more information and details, you can refer to the [CrateDB documentation](https://cratedb.com/connect/go).",
+      "output_text_b": "To connect to CrateDB using Go, you can utilize the pgx driver. Here is an example code snippet:\n\n```go\npackage main\n\nimport (\n    \"context\"\n    \"fmt\"\n\n    \"github.com/jackc/pgx/v5\"\n)\n\nfunc main() {\n    conn, err := pgx.Connect(context.Background(), \"your_crateDB_connection_string\")\n    if err != nil {\n        fmt.Fprintf(os.Stderr, \"Unable to connect to database: %v\\n\", err)\n        os.Exit(1)\n    }\n    defer conn.Close(context.Background())\n\n    // Perform your database operations here\n\n    fmt.Println(\"Connected to CrateDB!\")\n}\n```\n\nYou can find more information and examples on connecting to CrateDB with Go on the [CrateDB website](https://cratedb.com/connect/go).",
+      "score": 1.5,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and helpful responses. They both provided runnable Go code that can be copied and pasted, and they both referenced the CrateDB documentation for further information. However, Assistant A's response was more detailed and direct. It not only showed how to connect to CrateDB, but also how to execute a query and handle the results, which provides more value to a software engineer looking for information. Therefore, Assistant A's response is better. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and detailed responses. They both provided runnable code that can be copied and pasted, and they both referenced the source of their information. However, Assistant B's response was more helpful and direct. It not only showed how to connect to CrateDB but also demonstrated how to execute a query and handle the results, which provides more value to a software engineer looking for information. Therefore, Assistant B's response is better. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses. They both provided runnable code that can be copied and pasted, and they both referenced the source of their information. However, Assistant A's response was more detailed and helpful. It not only showed how to connect to CrateDB, but also demonstrated how to query data from the database and handle the results, which provides more value to a software engineer looking for information. Therefore, Assistant A's response is better. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and helpful responses. They both provided runnable code that can be copied and pasted, and they both referenced the source of their information. However, Assistant B's response was more detailed, providing an example of how to query the database and handle the results, which is more useful for a software engineer looking to use CrateDB with Go. Therefore, Assistant B's response is superior. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question. They both provided runnable Go code that can be copied and pasted, and they both referenced the CrateDB website for further information. However, Assistant A's response was more detailed and helpful. It not only showed how to connect to CrateDB, but also demonstrated how to execute a query and handle the results, which provides more value to a software engineer looking for information. Therefore, Assistant A's response is better. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and detailed responses. They both provided runnable code that can be copied and pasted, and they both referenced the source of their information. However, Assistant B's response was more helpful and direct. It not only showed how to connect to CrateDB, but also demonstrated how to execute a query and handle the results, which provides more value to a software engineer looking for information. Therefore, Assistant B's response is better. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "The answer is relevant to the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7783639369749266,
+            0.7778363965783741,
+            0.8768173110821089
+          ]
+        },
+        {
+          "rationale": "The answer is coherent and makes sense",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7522703788083462,
+            0.761880239834368,
+            0.8553416500322922
+          ]
+        },
+        {
+          "rationale": "The answer is detailed and provides enough information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8479842921964492,
+            0.7563478912554099,
+            0.8538042841426003
+          ]
+        },
+        {
+          "rationale": "The answer is helpful and provides value",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7775276097455359,
+            0.7716336290122137,
+            0.8486875417099506
+          ]
+        },
+        {
+          "rationale": "The answer directly answers the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7684578920390149,
+            0.7547902612562366,
+            0.9661752193519281
+          ]
+        },
+        {
+          "rationale": "The answer contains code that can be copied and pasted",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7582418561647124,
+            0.7278829632793712,
+            0.8246710500946087
+          ]
+        },
+        {
+          "rationale": "The answer contains reference to the source in form of URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7711923350077402,
+            0.7300448070028118,
+            0.8217348901616565
+          ]
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "input_text": "create RAG search with CrateDB and OpenAI?",
+      "tags": [
+        "RAG Search",
+        "CrateDB",
+        "OpenAI"
+      ],
+      "output_text_a": "To create RAG search with CrateDB and OpenAI, you can leverage vector search to use embeddings and generative AI as described in the blog post on CrateDB's website: [Leverage Vector Search to Use Embeddings and Generative AI: Retrieval Augmented Generation (RAG) with CrateDB](https://cratedb.com/blog/leverage-vector-search-to-use-embeddings-and-generative-ai-retrieval-augmented-generation-rag-with-cratedb). This post explains the RAG workflow with CrateDB, including identifying key data sets, building a knowledge-based index, and fetching relevant documents from the vector store based on a search algorithm.",
+      "output_text_b": "To create a RAG (Retrieval Augmented Generation) search with CrateDB and OpenAI, you can leverage vector search using embeddings and generative AI. This involves using CrateDB as a vector store and the OpenAI embedding model. The process includes identifying key data sets for training, generating a high-quality prompt, building a knowledge-based index, and fetching relevant documents from the vector store based on a search algorithm. More information on this process can be found in the blog post [here](https://cratedb.com/blog/leverage-vector-search-to-use-embeddings-and-generative-ai-retrieval-augmented-generation-rag-with-cratedb).",
+      "score": -1.5,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question. They both referenced the same source and provided a link to it, which is helpful and provides value to the user. However, Assistant B provided a slightly more detailed response by mentioning the use of CrateDB as a vector store and the OpenAI embedding model, and by outlining the process in a more detailed manner. Therefore, Assistant B's response is more helpful and detailed. Neither assistant provided runnable code, but this is not necessarily a requirement for a good response to this particular question. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provide relevant and coherent responses to the user's question. They both reference the same source and provide a link to it, which is helpful and provides value to the user. However, neither assistant provides runnable code, which is one of the criteria for evaluation. \n\nAssistant A provides a slightly more detailed response by mentioning the step of generating a high-quality prompt, which Assistant B does not mention. This additional detail could be useful to the user and makes Assistant A's response more comprehensive. \n\nTherefore, based on the criteria provided, Assistant A's response is slightly better. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question. They both referenced the same source, providing a link to a blog post on CrateDB's website that explains how to create a RAG search with CrateDB and OpenAI. Both assistants also provided a brief overview of the process, including identifying key data sets, building a knowledge-based index, and fetching relevant documents from the vector store based on a search algorithm. However, Assistant B provided a bit more detail by mentioning the use of CrateDB as a vector store and the OpenAI embedding model, and the process of generating a high-quality prompt. Therefore, Assistant B's response is more detailed and helpful. Neither assistant provided runnable code, but this is not necessarily a requirement for a good response to this particular question. \n\nFinal verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question. They both referenced the same source and provided a brief overview of the process to create a RAG search with CrateDB and OpenAI. However, Assistant A's response was slightly more detailed and helpful, as it mentioned the step of generating a high-quality prompt, which was not mentioned by Assistant B. Neither assistant provided runnable code, but this was not requested by the user. Therefore, based on the criteria provided, Assistant A's response is slightly better. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question. They both referenced the same source, providing a link to a blog post that explains how to create a RAG search with CrateDB and OpenAI. Both assistants also provided a brief overview of the process, including identifying key data sets, building a knowledge-based index, and fetching relevant documents from the vector store based on a search algorithm. However, Assistant B added a bit more detail by mentioning the use of CrateDB as a vector store and the OpenAI embedding model, and the generation of a high-quality prompt. Therefore, Assistant B's response is slightly more detailed and helpful. \n\nFinal verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question. They both referenced the same source, which is a blog post on CrateDB's website, and provided a brief overview of the process of creating a RAG search with CrateDB and OpenAI. However, Assistant A's response was slightly more detailed and helpful, as it also mentioned the step of generating a high-quality prompt, which was not mentioned by Assistant B. Therefore, based on the criteria of detail and helpfulness, Assistant A's response is superior. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "The answer is detailed and provides enough information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8479842921964492,
+            0.7563478912554099,
+            0.8538042841426003
+          ]
+        },
+        {
+          "rationale": "The answer is helpful and provides value",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7775276097455359,
+            0.7716336290122137,
+            0.8486875417099506
+          ]
+        },
+        {
+          "rationale": "The answer is relevant to the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7783639369749266,
+            0.7778363965783741,
+            0.8768173110821089
+          ]
+        },
+        {
+          "rationale": "The answer is coherent and makes sense",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7522703788083462,
+            0.761880239834368,
+            0.8553416500322922
+          ]
+        },
+        {
+          "rationale": "The answer links to the source of the information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7863665346146411,
+            0.7497948357468208,
+            0.8630212478940905
+          ]
+        },
+        {
+          "rationale": "The answer contains reference to the source in form of URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7711923350077402,
+            0.7300448070028118,
+            0.8217348901616565
+          ]
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "input_text": "how to alter table and add fulltext index?",
+      "tags": [
+        "Alter Table",
+        "Fulltext Index"
+      ],
+      "output_text_a": "To alter a table and add a full-text index in CrateDB, you can use the `ALTER TABLE` statement along with the `ADD INDEX` clause. Here is an example of how you can achieve this:\n\n```sql\nALTER TABLE your_table_name\nADD INDEX your_column_name_ft USING FULLTEXT(your_column_name) WITH (analyzer = 'english');\n```\n\nMake sure to replace `your_table_name` with the actual name of your table and `your_column_name` with the column for which you want to add the full-text index.\n\nFor more information on fulltext indices in CrateDB, you can refer to the official documentation [here](https://cratedb.com/docs/crate/reference/en/master/general/ddl/fulltext-indices.html).",
+      "output_text_b": "To alter a table and add a fulltext index in CrateDB, you can follow the syntax provided in the documentation:\n\n1. Define the table:\n   ```\n   cr> create table table_f (\n   ...   first_column text,\n   ... );\n   ```\n\n2. Add a fulltext index to the specified column:\n   ```\n   cr> alter table table_f add index first_column_ft\n   ... using fulltext(first_column) with (analyzer = 'english');\n   ```\n   \n   For further information and detailed steps, you can refer to the [CrateDB documentation](https://cratedb.com/docs/crate/reference/en/master/general/ddl/fulltext-indices.html).",
+      "score": -1.5,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both assistants provide relevant, coherent, and detailed responses that directly answer the user's question. They both provide runnable code and reference the source of their information. However, Assistant B's response is slightly more helpful as it provides an additional step of defining the table before adding the fulltext index, which could be beneficial for a user who is not familiar with the process. Therefore, Assistant B's response is more comprehensive and helpful. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both assistants provide accurate and relevant responses to the user's question. They both provide runnable code that can be copied and pasted, and they both link to the source of the information. Both responses are coherent, detailed, helpful, and directly answer the question. However, Assistant A provides a slightly more detailed response by including the step of defining the table before adding the fulltext index, which could be helpful for a user who is less familiar with the process. Therefore, Assistant A's response is slightly better. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both assistants provide relevant, coherent, and detailed responses that directly answer the user's question. They both provide runnable code and reference the source of their information. However, Assistant B goes a step further by providing an example of how to define a table before adding a fulltext index, which could be helpful for a user who is not familiar with this process. Therefore, Assistant B's response is slightly more helpful and detailed. \n\nFinal verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both assistants provide relevant, coherent, and detailed responses that directly answer the user's question. They both provide runnable code and reference the same source for further information. However, Assistant A provides a slightly more detailed response by including the step of defining the table before adding the fulltext index, which could be more helpful for a user who is less familiar with the process. Therefore, Assistant A's response is slightly better. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both assistants provide relevant, coherent, and detailed responses that directly answer the user's question. They both provide runnable code that can be copied and pasted, and they both link to the source of their information. However, Assistant B's response is slightly more helpful because it provides an extra step of creating a table before adding a fulltext index, which could be beneficial for a user who is starting from scratch. Therefore, Assistant B's response is more comprehensive and helpful. \n\nFinal verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both assistants provide relevant, coherent, and helpful responses. They both provide runnable code and reference the same source for further information. However, Assistant A provides a more detailed response by including the step of defining the table before adding the fulltext index, which could be helpful for a user who is not familiar with the process. Therefore, Assistant A's response is more comprehensive and detailed. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "Software engineer who is looking for information can copy and paste the code and it should work",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7647874664688068,
+            0.7332916272037397,
+            0.7705550824563614
+          ]
+        },
+        {
+          "rationale": "The answer is relevant to the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7783639369749266,
+            0.7778363965783741,
+            0.8768173110821089
+          ]
+        },
+        {
+          "rationale": "The answer links to the source of the information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7863665346146411,
+            0.7497948357468208,
+            0.8630212478940905
+          ]
+        },
+        {
+          "rationale": "The answer is coherent and makes sense",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7522703788083462,
+            0.761880239834368,
+            0.8553416500322922
+          ]
+        },
+        {
+          "rationale": "The answer is detailed and provides enough information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8479842921964492,
+            0.7563478912554099,
+            0.8538042841426003
+          ]
+        },
+        {
+          "rationale": "The answer is helpful and provides value",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7775276097455359,
+            0.7716336290122137,
+            0.8486875417099506
+          ]
+        },
+        {
+          "rationale": "The answer directly answers the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7685315200795,
+            0.7548819563073876,
+            0.9661837354883043
+          ]
+        },
+        {
+          "rationale": "The answer contains code that can be copied and pasted",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7582418561647124,
+            0.7278829632793712,
+            0.8246710500946087
+          ]
+        },
+        {
+          "rationale": "The answer contains reference to the source in form of URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7711923350077402,
+            0.7300448070028118,
+            0.8217348901616565
+          ]
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "input_text": "how to alter table and add vector type field that allows for KNN search?",
+      "tags": [
+        "Alter Table",
+        "Vector Type",
+        "KNN Search"
+      ],
+      "output_text_a": "To alter a table and add a vector type field that allows for KNN search in CrateDB, you can follow the steps outlined in the official documentation:\n\n1. Create a table with vector data type:\n   ```sql\n   CREATE TABLE my_data (\n     xs FLOAT_VECTOR(2)\n   );\n   ```\n\n2. Insert values into the table:\n   ```sql\n   INSERT INTO my_data VALUES ([1.6,2.7]), ([4.6, 7.8]);\n   ```\n\n3. The `FLOAT_VECTOR` type in CrateDB allows you to store dense vectors of float values of fixed length and supports KNN_MATCH for k-nearest neighbor search. This enables you to find vectors in a dataset that are similar to a query vector.\n\nYou can refer to the source for more information: [CrateDB Documentation - Data Types](https://cratedb.com/docs/crate/reference/en/master/general/ddl/data-types.html)",
+      "output_text_b": "To alter a table and add a vector type field that allows for KNN search in CrateDB, you can follow the steps mentioned in the official documentation:\n\n1. Create a table with the desired vector field type:\n\n```sql\nCREATE TABLE my_data (\n  xs FLOAT_VECTOR(2)\n);\n```\n\n2. Insert data into the table:\n\n```sql\nINSERT INTO my_data VALUES ([1.6,2.7]), ([4.6, 7.8]);\n```\n\nBy following these steps, you can add a vector type field to a table in CrateDB that allows for KNN search. You can refer to the [official documentation](https://cratedb.com/blog/unlocking-the-power-of-vector-support-and-knn-search-in-cratedb) for more details.",
+      "score": 1.5,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Both assistants provide relevant, coherent, and detailed responses that directly answer the user's question. They both provide runnable SQL code that can be copied and pasted, and they both link to the source of their information. However, Assistant A provides a bit more detail about the `FLOAT_VECTOR` type and its use in k-nearest neighbor search, which adds to the helpfulness of the response. Therefore, Assistant A's response is slightly better. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provide relevant, coherent, and detailed responses to the user's question. They both provide runnable code that can be copied and pasted, and they both link to their sources of information. However, Assistant B provides a bit more detail about the `FLOAT_VECTOR` type and its use in k-nearest neighbor search, which adds to the helpfulness of the response. Therefore, Assistant B's response is slightly better. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and detailed responses. They both provided runnable code that can be copied and pasted, and they both directly answered the user's question. They also both provided a reference to the source of their information. However, Assistant A provided a bit more detail about the `FLOAT_VECTOR` type and its use in KNN_MATCH for k-nearest neighbor search, which adds to the helpfulness of the response. Therefore, Assistant A's response is slightly better. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provide relevant, coherent, and detailed responses to the user's question. They both provide runnable SQL code that can be copied and pasted, and they both link to the source of their information. However, Assistant B provides a bit more detail about the `FLOAT_VECTOR` type and its use in k-nearest neighbor search, which adds to the helpfulness of the response. Therefore, Assistant B's response is slightly better. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and detailed responses. They both provided runnable SQL code that can be copied and pasted, and they both linked to the source of their information. However, Assistant A provided a bit more detail about the `FLOAT_VECTOR` type and its use in k-nearest neighbor search, which makes the response more helpful and informative. Therefore, Assistant A's response is slightly better. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and detailed responses to the user's question. They both provided runnable SQL code that can be copied and pasted, and they both linked to the source of their information. However, Assistant B provided a bit more detail about the `FLOAT_VECTOR` type and its use in k-nearest neighbor search, which adds to the helpfulness and depth of the response. Therefore, Assistant B's response is slightly better. \n\nFinal verdict: [[B]]",
+          "rating_label": "B"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "Software engineer who is looking for information can copy and paste the code and it should work",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7647874664688068,
+            0.7332916272037397,
+            0.7705550824563614
+          ]
+        },
+        {
+          "rationale": "The answer is relevant to the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7783639369749266,
+            0.7778363965783741,
+            0.8768173110821089
+          ]
+        },
+        {
+          "rationale": "The answer links to the source of the information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7863665346146411,
+            0.7497948357468208,
+            0.8630212478940905
+          ]
+        },
+        {
+          "rationale": "The answer is coherent and makes sense",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7522703788083462,
+            0.761880239834368,
+            0.8553416500322922
+          ]
+        },
+        {
+          "rationale": "The answer is detailed and provides enough information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8479958459524014,
+            0.7563002633297037,
+            0.8537846502209845
+          ]
+        },
+        {
+          "rationale": "The answer is helpful and provides value",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7775276097455359,
+            0.7716336290122137,
+            0.8486875417099506
+          ]
+        },
+        {
+          "rationale": "The answer directly answers the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7684578920390149,
+            0.7547902612562366,
+            0.9661752193519281
+          ]
+        },
+        {
+          "rationale": "The answer contains code that can be copied and pasted",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7582418561647124,
+            0.7278829632793712,
+            0.8246710500946087
+          ]
+        },
+        {
+          "rationale": "The answer contains reference to the source in form of URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7711923350077402,
+            0.7300448070028118,
+            0.8217348901616565
+          ]
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "input_text": "create table with fields ID, name, vector, and index vector field for KNN search?",
+      "tags": [
+        "Create Table",
+        "Fields",
+        "KNN Search"
+      ],
+      "output_text_a": "To create a table with fields ID, name, vector, and index the vector field for KNN search, you can use the following SQL query:\n\n```sql\nCREATE TABLE my_table (\n  ID INTEGER PRIMARY KEY,\n  name TEXT,\n  vector FLOAT_VECTOR(2),\n  INDEX vector_Idx USING GIN (vector) WITH (fastupdate='off')\n);\n```\n\nThis query creates a table called `my_table` with the specified fields and creates an index on the `vector` field to optimize KNN search operations.\n\nSource: [CrateDB Documentation](https://cratedb.com/docs/crate/reference/en/master/sql/statements/create-index.html)",
+      "output_text_b": "To create a table with fields ID, name, vector, and index vector field for KNN search, you can use the following SQL commands:\n\n```sql\nCREATE TABLE my_table (\n   ID INTEGER,\n   name TEXT,\n   vector FLOAT_VECTOR(2),\n   INDEX my_vector_index USING KNN (vector) WITH (dimension = 2)\n);\n```\n\nThis SQL statement will create a table named `my_table` with the specified fields and an index on the `vector` field optimized for KNN searches.\n\nSources:\n- [CrateDB Blog - Unlocking the Power of Vector Support and KNN Search in CrateDB](https://cratedb.com/blog/unlocking-the-power-of-vector-support-and-knn-search-in-cratedb)\n- [CrateDB Documentation - Data Types](https://cratedb.com/docs/crate/reference/en/master/general/ddl/data-types.html)",
+      "score": -1.5,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both assistants provide a runnable SQL command that creates a table with the specified fields and indexes the vector field for KNN search. Both responses are relevant, grounded, coherent, detailed, helpful, direct, and contain code that can be copied and pasted. Assistant A provides a single source reference, while Assistant B provides two source references, which adds a bit more depth to the response. Therefore, Assistant B's response is slightly better due to the additional reference. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and detailed responses. They both provided runnable SQL code that the user can copy and paste. They also both provided a source for their information, grounding their responses. \n\nHowever, Assistant A's response is slightly more helpful and direct. Assistant A explained what the SQL statement does, which adds value to the response and directly answers the user's question. Assistant B, while also providing a correct and relevant response, did not explain the SQL statement as thoroughly as Assistant A did. \n\nTherefore, based on the criteria provided, Assistant A's response is better. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both assistants provide relevant, coherent, and detailed responses that directly answer the user's question. They both provide runnable SQL code that can be copied and pasted. However, Assistant B's response is slightly more helpful as it provides two sources of information, including a blog post that could provide additional context and understanding for the user. Therefore, Assistant B's response is more grounded and provides more value. \n\nFinal verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and detailed responses. They both provided runnable SQL code that can be copied and pasted. They also both provided a source for their information, meeting the reference criterion. \n\nHowever, Assistant A's response is slightly more helpful and direct. Assistant A explained what the SQL statement does, which is creating a table named `my_table` with the specified fields and an index on the `vector` field optimized for KNN searches. On the other hand, Assistant B's explanation is less detailed, only stating that the query creates a table and an index without explaining what the index is for.\n\nTherefore, based on the evaluation criteria, Assistant A's response is better. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and detailed responses to the user's question. They both provided runnable SQL code that the user can copy and paste. They also both provided references to their sources of information. However, Assistant B's response is slightly more helpful because it provides two sources of information, including a blog post that could provide additional context and understanding for the user. Therefore, Assistant B's response is slightly better. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant, coherent, and detailed responses. They both provided runnable SQL code that can be copied and pasted. They also both provided a source for their information, meeting the reference criterion. \n\nHowever, Assistant A's response is slightly more helpful and direct. Assistant A explained that the SQL statement will create a table with the specified fields and an index on the `vector` field optimized for KNN searches. Assistant B's explanation was similar, but it did not explicitly mention that the index is optimized for KNN searches. \n\nTherefore, based on the criteria provided, Assistant A's response is slightly better. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "Assistant A's response is slightly more helpful and direct",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7920841946869992,
+            0.7816397045304936,
+            0.8457873960392435
+          ]
+        },
+        {
+          "rationale": "Assistant A's response is slightly more direct in explaining the index optimization for KNN searches",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7518864544061079,
+            0.7565050658873405,
+            0.8062808128616769
+          ]
+        },
+        {
+          "rationale": "Assistant B's response is lacking in explicitly mentioning the index optimization for KNN searches",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7598759578162886,
+            0.7458559572965054,
+            0.7805647460827944
+          ]
+        },
+        {
+          "rationale": "Both responses are relevant, coherent, detailed, contain code, and provide a reference",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7671641833878495,
+            0.7641334031129849,
+            0.8009431951056445
+          ]
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "input_text": "What are limits and limitations of CrateDB?",
+      "tags": [
+        "Limits",
+        "Limitations",
+        "CrateDB"
+      ],
+      "output_text_a": "The limitations of CrateDB include the lack of capabilities such as high speed, scalability, and high availability in the single-node CRFEE plan. However, users can easily create a new cluster with another plan from within the Cloud Console. You can find more information about these limitations on the [CrateDB website](https://cratedb.com/lp-crfree).",
+      "output_text_b": "The limitations of CrateDB include the fact that the single-node CRFEE plan does not offer capabilities such as high speed, scalability, and high-availability that you would get from a standard CrateDB distributed cluster. However, you can easily create a new cluster with another plan from within the Cloud Console. You can find more information about the limitations on the [CrateDB website](https://cratedb.com/lp-crfree).",
+      "score": 0.0,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": 0.0,
+          "rationale": "Both Assistant A and Assistant B provided similar responses to the user's question. They both mentioned the limitations of CrateDB, specifically in relation to the single-node CRFEE plan. They also both provided a link to the CrateDB website for further information. The responses are coherent, relevant, grounded, detailed, helpful, and direct. However, neither response contains runnable code, which is one of the criteria for evaluation. Given the nature of the question, it's understandable that no code was provided. Overall, both responses are equally good in answering the user's question. Therefore, my final verdict is: [[C]] for a tie."
+        },
+        {
+          "is_flipped": true,
+          "score": -0.0,
+          "rationale": "Both Assistant A and Assistant B provided similar responses to the user's question. They both mentioned the limitations of CrateDB, specifically the lack of high speed, scalability, and high availability in the single-node CRFEE plan. They also both provided a link to the CrateDB website for more information. Both responses are coherent, relevant, grounded, detailed, helpful, and direct. Neither response contains runnable code, but this is not applicable to the question asked. Therefore, I would rate these responses as a tie. \n\nFinal verdict: [[C]]"
+        },
+        {
+          "is_flipped": false,
+          "score": 0.0,
+          "rationale": "Both Assistant A and Assistant B provided similar responses to the user's question. They both mentioned the limitations of CrateDB, specifically in relation to the single-node CRFEE plan. They also both provided a link to the CrateDB website for further information. Both responses are coherent, relevant, grounded, detailed, helpful, and direct. Neither response contains runnable code, but this is not applicable to the question asked. Therefore, it's a tie between the two assistants. \n\nFinal verdict: [[C]]"
+        },
+        {
+          "is_flipped": true,
+          "score": -0.0,
+          "rationale": "Both Assistant A and Assistant B provided similar responses to the user's question. They both mentioned the limitations of CrateDB, specifically referring to the single-node CRFEE plan. They also both provided a link to the CrateDB website for further information. The responses are coherent, relevant, and direct. They both provide the same level of detail and are equally helpful. Neither response contains runnable code, but this is not applicable to the user's question. Therefore, it's a tie.\n\nFinal Verdict: [[C]]"
+        },
+        {
+          "is_flipped": false,
+          "score": 0.0,
+          "rationale": "Both Assistant A and Assistant B provided similar responses to the user's question. They both mentioned the limitations of CrateDB, specifically in relation to the single-node CRFEE plan. They also both provided a link to the CrateDB website for further information. Both responses are coherent, relevant, grounded, detailed, helpful, and direct. Neither response contains runnable code, but this is not applicable to the question asked. Therefore, it's a tie between the two assistants. \n\nFinal Verdict: [[C]]"
+        },
+        {
+          "is_flipped": true,
+          "score": -0.0,
+          "rationale": "Both Assistant A and Assistant B provided similar responses to the user's question. They both mentioned the limitations of CrateDB, specifically in the context of the single-node CRFEE plan. They also both provided a link to the CrateDB website for further information. The responses are coherent, relevant, grounded, detailed, helpful, and direct. Neither response contains runnable code, but this is not applicable to the question asked. Therefore, based on the evaluation criteria, both assistants performed equally well. \n\nFinal verdict: [[C]] for a tie."
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "The answer is relevant to the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7783639369749266,
+            0.7778363965783741,
+            0.8768173110821089
+          ]
+        },
+        {
+          "rationale": "The answer links to the source of the information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7863665346146411,
+            0.7497948357468208,
+            0.8630212478940905
+          ]
+        },
+        {
+          "rationale": "The answer is coherent and makes sense",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7522703788083462,
+            0.761880239834368,
+            0.8553416500322922
+          ]
+        },
+        {
+          "rationale": "The answer is detailed and provides enough information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8479842921964492,
+            0.7563478912554099,
+            0.8538042841426003
+          ]
+        },
+        {
+          "rationale": "The answer is helpful and provides value",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7775276097455359,
+            0.7716336290122137,
+            0.8486875417099506
+          ]
+        },
+        {
+          "rationale": "The answer directly answers the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7684578920390149,
+            0.7547902612562366,
+            0.9661752193519281
+          ]
+        },
+        {
+          "rationale": "The answer contains reference to the source in form of URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7711923350077402,
+            0.7300448070028118,
+            0.8217348901616565
+          ]
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "input_text": "What are the benefits of using CrateDB?",
+      "tags": [
+        "Benefits",
+        "CrateDB"
+      ],
+      "output_text_a": "The benefits of using CrateDB include high performance, scalability, flexibility, horizontal scalability, multi-model database engine support, multi-platform support, simplified data infrastructure, real-time data updates, native SQL query language, efficient management of concurrent reads and writes, reduced total cost of ownership (TCO), data synchronization, support for AI/ML, fully distributed query engine, columnar storage for fast data access, ad-hoc queries across billions of records in milliseconds, hyper-fast aggregations, in-memory SQL query performance, high-performance distributed query engine, support for dynamic schemas, queryable objects, time-series data, real-time full-text search, and a powerful REST API for programmable interface management. \n\nSources:\n- [CrateDB Customers - SPGO](https://cratedb.com/customers/spgo)\n- [CrateDB Customers - ABB](https://cratedb.com/customers/abb)\n- [CrateDB Blog - Data Challenges ML AI](https://cratedb.com/blog/data-challenges-ml-ai)\n- [CrateDB Solutions - Database Consolidation](https://cratedb.com/solutions/database-consolidation)\n- [CrateDB Product Features - Distributed Database](https://cratedb.com/product/features/distributed-database)\n- [CrateDB Blog - What is Data Consolidation](https://cratedb.com/blog/what-is-data-consolidation-an-overview)\n- [CrateDB Product Features - Query Performance](https://cratedb.com/product/features/query-performance)\n- [CrateDB Blog - Automating Export of CrateDB Data](https://cratedb.com/blog/automating-export-of-cratedb-data-to-s3-using-apache-airflow)\n- [CrateDB Product Features - REST API](https://cratedb.com/product/features/rest-api)",
+      "output_text_b": "The benefits of using CrateDB include high performance, scalability, flexibility, horizontal scalability, multi-model database engine support, multi-platform support, native SQL query language, efficient management of extensive concurrent reads and writes, reduction of total cost of ownership, simplified data infrastructure, real-time data updates, support for multiple data types, fully distributed query engine, columnar storage for fast data querying, high-performance capabilities with query response time in milliseconds, support for dynamic schemas, queryable objects, time-series data, real-time full-text search, and a powerful REST API for managing and accessing CrateDB programmatically. \n\nSources:\n- [CrateDB Customers - SPGO](https://cratedb.com/customers/spgo)\n- [CrateDB Customers - ABB](https://cratedb.com/customers/abb)\n- [CrateDB Blog - Data Challenges in ML/AI](https://cratedb.com/blog/data-challenges-ml-ai)\n- [CrateDB Solutions - Database Consolidation](https://cratedb.com/solutions/database-consolidation)\n- [CrateDB Features - Distributed Database](https://cratedb.com/product/features/distributed-database)\n- [CrateDB Blog - What is Data Consolidation](https://cratedb.com/blog/what-is-data-consolidation-an-overview)\n- [CrateDB Features - Query Performance](https://cratedb.com/product/features/query-performance)\n- [CrateDB Blog - Automating Export of CrateDB Data to S3 using Apache Airflow](https://cratedb.com/blog/automating-export-of-cratedb-data-to-s3-using-apache-airflow)\n- [CrateDB Features - REST API](https://cratedb.com/product/features/rest-api)",
+      "score": 0.5,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provided detailed, relevant, and coherent responses to the user's question about the benefits of using CrateDB. Both assistants listed a comprehensive set of benefits and provided references to the source of their information. However, Assistant A mentioned a few additional benefits such as support for AI/ML, ad-hoc queries across billions of records in milliseconds, hyper-fast aggregations, in-memory SQL query performance, and data synchronization. Therefore, Assistant A's response is slightly more detailed and helpful. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": -0.0,
+          "rationale": "Both Assistant A and Assistant B provided detailed, relevant, and coherent responses to the user's question about the benefits of using CrateDB. Both assistants provided a list of benefits and linked to multiple sources for further information, meeting the criteria for grounded and reference. Neither response included runnable code, but this was not necessary for the question asked. The responses are very similar, with Assistant B mentioning a few additional benefits such as data synchronization and support for AI/ML. However, these additional points do not significantly enhance the overall quality of the response. Therefore, the decision is a tie. \n\nFinal Verdict: [[C]]"
+        },
+        {
+          "is_flipped": false,
+          "score": 0.0,
+          "rationale": "Both Assistant A and Assistant B provided detailed, relevant, and coherent responses to the user's question about the benefits of using CrateDB. Both assistants listed a comprehensive set of benefits and provided references to the source of their information. Neither response included runnable code, but this was not necessary given the nature of the question. The responses are nearly identical, with only minor differences in wording. Therefore, it's difficult to determine one as superior to the other based on the given criteria. \n\nFinal Verdict: [[C]] for a tie."
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provided detailed, relevant, and coherent responses to the user's question about the benefits of using CrateDB. Both assistants also provided a list of sources to back up their claims, which makes their responses grounded. However, neither assistant provided runnable code, which is not applicable in this context as the user's question does not require a code-based answer. \n\nThe main difference between the two responses is that Assistant B mentioned additional benefits such as data synchronization and support for AI/ML, which were not mentioned by Assistant A. Therefore, Assistant B's response is slightly more detailed and helpful.\n\nBased on the evaluation criteria, my final verdict is: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided detailed, relevant, and coherent responses to the question about the benefits of using CrateDB. Both assistants listed a comprehensive set of benefits and provided references to the source of their information. However, Assistant B's response is slightly more detailed as it mentions the support for multiple data types and the high-performance capabilities with query response time in milliseconds, which were not mentioned by Assistant A. Therefore, Assistant B's response is more helpful and provides more value to the user. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provided detailed, relevant, and coherent responses to the user's question about the benefits of using CrateDB. Both assistants also provided a list of sources for their information, which makes their responses grounded and helpful. However, neither assistant provided a runnable code, which is not applicable in this context as the user's question does not require a code-based answer. \n\nThe main difference between the two responses is that Assistant B mentioned additional benefits such as data synchronization and support for AI/ML, which were not mentioned by Assistant A. Therefore, Assistant B's response is slightly more detailed and comprehensive.\n\nBased on the evaluation criteria, Assistant B's response is slightly better due to the additional details provided. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "The answer is relevant to the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7783639369749266,
+            0.7778363965783741,
+            0.8768173110821089
+          ]
+        },
+        {
+          "rationale": "The answer links to the source of the information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7863665346146411,
+            0.7497948357468208,
+            0.8630212478940905
+          ]
+        },
+        {
+          "rationale": "The answer is coherent and makes sense",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7522703788083462,
+            0.761880239834368,
+            0.8553416500322922
+          ]
+        },
+        {
+          "rationale": "The answer is detailed and provides enough information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8479842921964492,
+            0.7563478912554099,
+            0.8538042841426003
+          ]
+        },
+        {
+          "rationale": "The answer is helpful and provides value",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7775276097455359,
+            0.7716336290122137,
+            0.8486875417099506
+          ]
+        },
+        {
+          "rationale": "The answer directly answers the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7684578920390149,
+            0.7547902612562366,
+            0.9661752193519281
+          ]
+        },
+        {
+          "rationale": "The answer contains reference to the source in form of URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7711923350077402,
+            0.7300448070028118,
+            0.8217348901616565
+          ]
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "input_text": "Does index creation block write operations?",
+      "tags": [
+        "Index Creation",
+        "Write Operations"
+      ],
+      "output_text_a": "Based on the provided context, index creation does not block write operations. The blocking of write operations would occur if the `write.wait_for_active_shards` setting is configured a certain way and a node is stopped during the write operation. The write operations would then block until the replica is fully replicated again or timeout if the replication is not fast enough. \n\nSource: [CrateDB Documentation](https://cratedb.com/docs/crate/reference/en/5.6/sql/statements/create-table.html)",
+      "output_text_b": "Based on the context provided, index creation does not block write operations.",
+      "score": 1.5,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Assistant A provides a more detailed and helpful response. It not only confirms that index creation does not block write operations, but also explains a scenario where write operations could be blocked. This additional information could be useful to the user. Assistant A also provides a source for its information, which meets the 'grounded' and 'reference' criteria. On the other hand, Assistant B's response is very brief and lacks detail. It does not provide any additional information or a source for its claim. Therefore, Assistant A's response is superior based on the criteria provided. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Assistant B provides a more detailed and helpful response. While both assistants state that index creation does not block write operations, Assistant B goes further to explain a scenario where write operations could be blocked, which adds depth to the answer. Assistant B also provides a source for their information, which makes their response more grounded and reliable. Therefore, Assistant B's response is more comprehensive and informative. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Assistant A provides a more detailed and helpful response than Assistant B. While both assistants correctly state that index creation does not block write operations, Assistant A goes further to explain a scenario where write operations could be blocked, which adds depth to the answer. Assistant A also provides a source for their information, which makes their response more grounded and reliable. Therefore, Assistant A's response is superior based on the criteria of detail, helpfulness, and reference. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Assistant B's response is more detailed and provides a source for the information, which makes it more grounded and helpful. It also explains a specific scenario where write operations could be blocked, adding depth to the answer. Assistant A's response, while correct, is less detailed and does not provide a source for the information. Therefore, Assistant B's response is superior in terms of detail, helpfulness, and grounding. \n\nFinal verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Assistant A provides a more detailed and helpful response. It explains a scenario where write operations could be blocked, which adds depth to the answer. It also provides a source for its information, which makes the answer grounded and reliable. On the other hand, Assistant B's response is very brief and lacks detail. It does not provide any additional information or source for its claim. Therefore, Assistant A's response is superior based on the criteria of detail, helpfulness, and grounding. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Assistant B's response is more detailed and provides a specific scenario where write operations could be blocked during index creation. It also provides a reference to the source of the information, which is a good practice for credibility and further reading. On the other hand, Assistant A's response is too brief and lacks detail. Therefore, Assistant B's response is more helpful, detailed, and grounded. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "The answer is detailed and provides enough information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8479842921964492,
+            0.7563478912554099,
+            0.8538042841426003
+          ]
+        },
+        {
+          "rationale": "The answer contains reference to the source in form of URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7711923350077402,
+            0.7300448070028118,
+            0.8217348901616565
+          ]
+        },
+        {
+          "rationale": "The answer is too brief and lacks detail",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8132411967186959,
+            0.7604860579592769,
+            0.836754252375777
+          ]
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "input_text": "Does crate supports conditional indices",
+      "tags": [
+        "Crate",
+        "Conditional Indices"
+      ],
+      "output_text_a": "Based on the provided context, CrateDB automatically generates indexes for all attributes regardless of their depth, enabling rapid search capabilities for stored objects and facilitating efficient updates. However, it does not specifically mention support for conditional indices. \n\nSource: [CrateDB Solutions - JSON Database](https://cratedb.com/solutions/json-database)",
+      "output_text_b": "Based on the provided context, CrateDB automatically generates indexes for all attributes regardless of their depth, enabling rapid search capabilities for stored objects and facilitating efficient updates. However, there is no specific mention of conditional indices in the context provided. \n\nFor more information on indexing in CrateDB, you can refer to the source: [Indexing and Storage in CrateDB](https://cratedb.com/blog/indexing-and-storage-in-cratedb)",
+      "score": -0.75,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both assistants provided similar responses, stating that CrateDB automatically generates indexes for all attributes but does not specifically mention support for conditional indices. Both responses are coherent, relevant, and direct. However, Assistant B provided a more specific source that directly relates to indexing in CrateDB, which makes it slightly more helpful and detailed. Therefore, Assistant B has a slight edge over Assistant A in this comparison. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -0.0,
+          "rationale": "Both Assistant A and Assistant B provided similar responses. They both explained that CrateDB automatically generates indexes for all attributes but did not specifically mention support for conditional indices. Both assistants provided a source for their information, which meets the criteria for being grounded and having a reference. Both responses are coherent, relevant, and direct. However, neither response provided runnable code, which is one of the criteria. The level of detail and helpfulness are also similar in both responses. Therefore, it's a tie between the two assistants. \n\nFinal Verdict: [[C]]"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided similar responses to the user's question. They both explained that CrateDB automatically generates indexes for all attributes but did not specifically mention support for conditional indices. Both responses are coherent, relevant, grounded, and direct. However, Assistant B provided a more specific source that directly relates to indexing in CrateDB, which makes it slightly more helpful and detailed. Therefore, Assistant B has a slight edge over Assistant A in this comparison. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -0.0,
+          "rationale": "Both Assistant A and Assistant B provided similar responses. They both explained that CrateDB automatically generates indexes for all attributes but did not specifically mention support for conditional indices. Both assistants provided a source for their information, which meets the criteria for being grounded and having a reference. Both responses are coherent, relevant, and direct. However, neither response provided runnable code, which is one of the criteria. The level of detail and helpfulness are also similar in both responses. Therefore, it's a tie between the two assistants. \n\nFinal Verdict: [[C]]"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided similar responses to the user's question. They both explained that CrateDB automatically generates indexes for all attributes but did not specifically mention support for conditional indices. Both responses are coherent, relevant, and direct. They both provided a source for their information, meeting the grounded and reference criteria. However, Assistant B's source seems to be more directly related to the topic of indexing in CrateDB, which might be more helpful for a software engineer looking for more detailed information on this topic. Therefore, Assistant B's response is slightly better. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -0.0,
+          "rationale": "Both Assistant A and Assistant B provided similar responses. They both explained that CrateDB automatically generates indexes for all attributes but did not specifically mention support for conditional indices. Both assistants provided a source for their information, which meets the criteria for being grounded and having a reference. Both responses are coherent, relevant, and direct. However, neither response provided runnable code, which is one of the criteria. The level of detail and helpfulness are also similar in both responses. Therefore, it's a tie between the two assistants. \n\nFinal Verdict: [[C]]"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "The answer is detailed and provides enough information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8479958459524014,
+            0.7563002633297037,
+            0.8537846502209845
+          ]
+        },
+        {
+          "rationale": "The answer is helpful and provides value",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7775276097455359,
+            0.7716336290122137,
+            0.8486875417099506
+          ]
+        },
+        {
+          "rationale": "The answer is coherent and makes sense",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7522703788083462,
+            0.761880239834368,
+            0.8553416500322922
+          ]
+        },
+        {
+          "rationale": "The answer is relevant to the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7783639369749266,
+            0.7778363965783741,
+            0.8768173110821089
+          ]
+        },
+        {
+          "rationale": "The answer links to the source of the information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7863665346146411,
+            0.7497948357468208,
+            0.8630212478940905
+          ]
+        },
+        {
+          "rationale": "The answer directly answers the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7684578920390149,
+            0.7547902612562366,
+            0.9661752193519281
+          ]
+        },
+        {
+          "rationale": "The answer contains code that can be copied and pasted",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7582418561647124,
+            0.7278829632793712,
+            0.8246710500946087
+          ]
+        },
+        {
+          "rationale": "The answer contains reference to the source in form of URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7711923350077402,
+            0.7300448070028118,
+            0.8217348901616565
+          ]
+        }
+      ]
+    },
+    {
+      "index": 16,
+      "input_text": "How to create ID field that is autoincremented?",
+      "tags": [
+        "Autoincrement",
+        "ID Field"
+      ],
+      "output_text_a": "Based on the provided context, the _id field in CrateDB is not autoincremented by default. Instead, it is recommended to use random UUIDs as keys for the primary key. If you need an autoincrementing primary key, you would need to manually generate and manage it yourself. \n\nSources:\n- [CrateDB Documentation - Tuning Inserts](https://cratedb.com/docs/guide/performance/inserts/tuning.html)\n- [CrateDB Documentation - Selects](https://cratedb.com/docs/guide/performance/selects.html)\n- [CrateDB Documentation - Constraints](https://cratedb.com/docs/crate/reference/en/master/general/ddl/constraints.html)",
+      "output_text_b": "Based on the provided context, CrateDB does not support autoincrementing primary keys. Instead, you would need to manually specify the primary key values when inserting data into the database. The `_id` column in CrateDB is used as a unique identifier for each record and should be deterministic.\n\nSource: [CrateDB Documentation](https://cratedb.com/docs/guide/performance/inserts/tuning.html)",
+      "score": 1.5,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Both assistants provide relevant and coherent answers to the user's question. They both explain that CrateDB does not support autoincrementing primary keys and that the user would need to manually specify the primary key values. However, Assistant A provides a more detailed response, mentioning the use of random UUIDs as keys for the primary key and providing multiple sources for further reading. Assistant B's response is more concise and direct, but lacks the depth and detail of Assistant A's response. Therefore, based on the evaluation criteria, Assistant A's response is superior. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both assistants provide relevant and coherent answers to the user's question. They both explain that CrateDB does not support autoincrementing primary keys and that the user would need to manually manage this. Both assistants also provide a link to the CrateDB documentation as a source of their information, fulfilling the 'reference' criterion. \n\nHowever, Assistant B provides more detail and is more helpful by suggesting the use of random UUIDs as keys for the primary key. Assistant B also provides additional sources for further reading, which could be beneficial for a software engineer looking for more information. \n\nNeither assistant provides runnable code, but this is not applicable in this case as the user's question does not require a code-based answer. \n\nBased on these considerations, I would conclude that Assistant B provided a better response. \n\nFinal verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Both assistants provide relevant and coherent answers to the user's question. They both explain that CrateDB does not support autoincrementing primary keys and that the user would need to manually specify the primary key values. However, Assistant A provides a more detailed response, explaining that the _id field in CrateDB is not autoincremented by default and that it is recommended to use random UUIDs as keys for the primary key. Assistant A also provides more sources for further reading, which makes their response more grounded and helpful. Therefore, Assistant A's response is superior based on the evaluation criteria. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both assistants provide relevant and coherent answers to the user's question. They both explain that CrateDB does not support autoincrementing primary keys and that the user would need to manually manage it. Both responses are grounded with links to the CrateDB documentation as a source of their information. However, Assistant B provides more detail and references by linking to multiple sections of the CrateDB documentation, which could provide the user with more comprehensive information. Therefore, Assistant B's response is more helpful and detailed. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Both assistants provide relevant and coherent answers to the user's question about creating an autoincremented ID field. They both correctly state that CrateDB does not support autoincrementing primary keys and that the user would need to manually specify these values. \n\nHowever, Assistant A's response is more detailed and helpful. It not only explains that the `_id` field in CrateDB is not autoincremented by default, but also suggests using random UUIDs as keys for the primary key. Furthermore, Assistant A provides more references to the source of the information, which makes the answer more grounded and reliable.\n\nTherefore, based on the evaluation criteria, Assistant A's response is superior. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both assistants provide accurate and relevant information about the lack of autoincrementing primary keys in CrateDB. They both suggest that the user will need to manually manage this aspect. Assistant B, however, provides more detail and references to the CrateDB documentation, which could be helpful for the user to understand more about the topic. Therefore, Assistant B's response is more helpful and detailed. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "Software engineer who is looking for information can copy and paste the code and it should work",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7647874664688068,
+            0.7332916272037397,
+            0.7705550824563614
+          ]
+        },
+        {
+          "rationale": "The answer is relevant to the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7783639369749266,
+            0.7778363965783741,
+            0.8768173110821089
+          ]
+        },
+        {
+          "rationale": "The answer links to the source of the information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7863665346146411,
+            0.7497948357468208,
+            0.8630212478940905
+          ]
+        },
+        {
+          "rationale": "The answer is coherent and makes sense",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7522703788083462,
+            0.761880239834368,
+            0.8553416500322922
+          ]
+        },
+        {
+          "rationale": "The answer is detailed and provides enough information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8479842921964492,
+            0.7563478912554099,
+            0.8538042841426003
+          ]
+        },
+        {
+          "rationale": "The answer is helpful and provides value",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7775276097455359,
+            0.7716336290122137,
+            0.8486875417099506
+          ]
+        },
+        {
+          "rationale": "The answer directly answers the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7684578920390149,
+            0.7547902612562366,
+            0.9661752193519281
+          ]
+        },
+        {
+          "rationale": "The answer contains code that can be copied and pasted",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7582418561647124,
+            0.7278829632793712,
+            0.8246710500946087
+          ]
+        },
+        {
+          "rationale": "The answer contains reference to the source in form of URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7711923350077402,
+            0.7300448070028118,
+            0.8217348901616565
+          ]
+        }
+      ]
+    },
+    {
+      "index": 17,
+      "input_text": "how to create analysers for fulltext search?",
+      "tags": [
+        "Create Analysers",
+        "Fulltext Search"
+      ],
+      "output_text_a": "To create analyzers for fulltext search, you can use language-specific analyzers, tokenizers, and token-filters. You can refer to the documentation provided by CrateDB for examples and instructions on how to create custom analyzers or extend built-in analyzers. Here is a simple example from the documentation: [CrateDB Documentation on Fulltext Indices](https://cratedb.com/docs/crate/reference/en/5.6/general/ddl/fulltext-indices.html)",
+      "output_text_b": "To create analyzers for fulltext search, you can use language-specific analyzers, tokenizers, and token-filters to get proper search results for data provided in a certain language. Here is a simple example: [CrateDB Documentation](https://cratedb.com/docs/crate/reference/en/5.6/general/ddl/fulltext-indices.html)",
+      "score": 1.5,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Both assistants provided relevant and coherent responses to the user's question. They both provided a link to the CrateDB documentation for further information, which satisfies the 'reference' criterion. However, Assistant A's response is slightly more detailed and helpful as it mentions the possibility of creating custom analyzers or extending built-in analyzers, which Assistant B does not mention. Therefore, Assistant A's response is more informative and provides more value to the user. Neither assistant provided runnable code, but this may not be necessary given the nature of the question. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both assistants provided similar responses, mentioning the use of language-specific analyzers, tokenizers, and token-filters for creating analyzers for fulltext search. Both also provided a link to the CrateDB documentation for further information. However, Assistant B's response was slightly more detailed, explaining that the documentation provides examples and instructions on how to create custom analyzers or extend built-in analyzers. This additional detail makes Assistant B's response more helpful and informative. Therefore, my final verdict is: [[B]].",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question. They both referenced the same source for further information, which is the CrateDB documentation. However, Assistant A's response is slightly more detailed and helpful as it mentions the possibility of creating custom analyzers or extending built-in analyzers, which is not mentioned by Assistant B. Therefore, Assistant A's response is more informative and provides more value to the user. Neither assistant provided runnable code, but this is not necessarily a requirement for a good response to this particular question. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both assistants provided relevant and coherent responses to the user's question. They both provided a link to the CrateDB documentation for further information, which satisfies the 'reference' and 'grounded' criteria. However, Assistant B's response was slightly more detailed and helpful, as it mentioned that the documentation provides instructions on how to create custom analyzers or extend built-in analyzers. Neither assistant provided runnable code, but this is not necessarily a requirement for this particular question. Therefore, based on the evaluation criteria, Assistant B provided a better response. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question. They both provided a link to the CrateDB documentation for further information, which satisfies the 'reference' criterion. However, Assistant A's response is slightly more detailed and helpful as it mentions the possibility of creating custom analyzers or extending built-in analyzers, which Assistant B does not mention. Therefore, Assistant A's response is more informative and provides more value to the user. Neither assistant provided runnable code, but this is not necessarily a requirement for a good response to this particular question. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Both assistants provided relevant and coherent responses to the user's question. They both provided a link to the CrateDB documentation for further information, which satisfies the 'reference' and 'grounded' criteria. However, neither assistant provided a runnable code example, which is a key criterion for this evaluation. \n\nAssistant B's response is slightly more detailed and helpful, as it mentions the possibility of creating custom analyzers or extending built-in analyzers, which provides a bit more information to the user. Therefore, based on the criteria provided, Assistant B's response is slightly better.\n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "The answer is relevant to the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7783639369749266,
+            0.7778363965783741,
+            0.8768173110821089
+          ]
+        },
+        {
+          "rationale": "The answer is coherent and makes sense",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7522703788083462,
+            0.761880239834368,
+            0.8553416500322922
+          ]
+        },
+        {
+          "rationale": "The answer links to the source of the information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7863665346146411,
+            0.7497948357468208,
+            0.8630212478940905
+          ]
+        },
+        {
+          "rationale": "The answer is detailed and provides enough information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8479842921964492,
+            0.7563478912554099,
+            0.8538042841426003
+          ]
+        },
+        {
+          "rationale": "The answer is helpful and provides value",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7775276097455359,
+            0.7716336290122137,
+            0.8486875417099506
+          ]
+        },
+        {
+          "rationale": "The answer contains code that can be copied and pasted",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7582418561647124,
+            0.7278829632793712,
+            0.8246710500946087
+          ]
+        },
+        {
+          "rationale": "The answer contains reference to the source in form of URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7711923350077402,
+            0.7300448070028118,
+            0.8217348901616565
+          ]
+        }
+      ]
+    },
+    {
+      "index": 18,
+      "input_text": "give me information about password and admin",
+      "tags": [
+        "Password",
+        "Admin"
+      ],
+      "output_text_a": "Passwords are used for authentication in CrateDB to control access via the CrateDB Admin UI and other interfaces. When using password authentication, the client must provide a password in addition to the username. This method ensures secure access to cluster health, monitoring, node listing, and table listing features in the Admin UI. More information can be found in the CrateDB documentation on password authentication methods: [CrateDB Documentation](https://cratedb.com/docs/crate/reference/en/master/admin/auth/methods.html#auth-password)",
+      "output_text_b": "Based on the provided context, password authentication is essential for accessing the CrateDB Admin UI. When using CrateDB, passwords are required in addition to the username for authentication purposes. The admin privileges are necessary for displaying cluster health, monitoring, and checks, as well as listing available nodes and tables within the cluster. This information can be found in the CrateDB documentation on authentication methods and user privileges.\n\nSources:\n- [CrateDB Documentation - Admin UI and Password Authentication](https://cratedb.com/docs/crate/reference/en/5.6/admin/auth/methods.html)\n- [CrateDB Documentation - Admin UI and Password Authentication](https://cratedb.com/docs/crate/reference/en/5.5/admin/auth/methods.html)\n- [CrateDB Documentation - Admin UI and Password Authentication](https://cratedb.com/docs/crate/reference/en/4.8/admin/auth/methods.html)\n- [CrateDB Documentation - Admin UI and Password Authentication](https://cratedb.com/docs/crate/reference/en/master/admin/auth/methods.html#auth-password)",
+      "score": -1.0,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both assistants provide relevant, coherent, and grounded responses to the user's question about password and admin information. They both reference the CrateDB documentation as a source of their information. However, Assistant B provides more detail and is more helpful by providing multiple versions of the CrateDB documentation, which could be useful if the user is using a different version of CrateDB. Therefore, Assistant B's response is more comprehensive and useful. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question about password and admin. They both provided a link to the CrateDB documentation for further reading, which satisfies the 'reference' criterion. However, Assistant A provided a more detailed response and linked to multiple versions of the CrateDB documentation, which could be more helpful to the user. Therefore, Assistant A's response is more comprehensive and useful. Neither assistant provided runnable code, but this was not necessary given the nature of the user's question. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both assistants provided relevant and coherent responses to the user's question about password and admin information. They both referenced the CrateDB documentation as a source of their information, which satisfies the 'grounded' and 'reference' criteria. However, Assistant B provided multiple links to different versions of the CrateDB documentation, which could be more helpful to the user if they are using a specific version of CrateDB. Neither assistant provided runnable code, but the question did not specifically ask for it. Both assistants were direct and detailed in their responses, but Assistant B's response was slightly more detailed, providing more context about the admin privileges. Therefore, based on the evaluation criteria, Assistant B's response is slightly better. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question about password and admin. They both referenced the CrateDB documentation for further information, which satisfies the 'reference' criterion. However, Assistant A provided a more detailed response, including more specific information about the admin privileges and their functions. Assistant A also provided multiple links to different versions of the CrateDB documentation, which could be more helpful to the user depending on the version they are using. Therefore, Assistant A's response is more helpful and detailed. Neither assistant provided runnable code, but the question did not specifically ask for it. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Both assistants provide relevant, coherent, and detailed responses to the user's question about password and admin information. They both reference the CrateDB documentation as a source of information, which satisfies the grounded and reference criteria. However, neither assistant provides runnable code, which is one of the evaluation criteria. \n\nAssistant A's response is more direct and concise, providing the necessary information without redundancy. On the other hand, Assistant B's response, while also accurate, is less direct and contains redundant links to the CrateDB documentation. \n\nTherefore, considering the criteria of directness and helpfulness, Assistant A's response is superior. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provide relevant and coherent responses to the user's question about password and admin. They both provide a link to the CrateDB documentation as a reference, which meets the 'reference' criterion. However, Assistant A provides a more detailed response and includes multiple versions of the CrateDB documentation, which could be more helpful to the user. Neither assistant provides runnable code, but this may not be necessary given the nature of the question. Therefore, based on the evaluation criteria, Assistant A provides a better response. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "Assistant A provides a more detailed response and includes multiple versions of the CrateDB documentation, which could be more helpful to the user.",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7833294112491441,
+            0.7460658339497683,
+            0.7647804152300489
+          ]
+        },
+        {
+          "rationale": "Both Assistant A and Assistant B provide relevant and coherent responses to the user's question about password and admin.",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7628536958987803,
+            0.7338669350995204,
+            0.7896570181183238
+          ]
+        },
+        {
+          "rationale": "Both Assistant A and Assistant B provide relevant and coherent responses to the user's question about password and admin.",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7628536958987803,
+            0.7338669350995204,
+            0.7896570181183238
+          ]
+        },
+        {
+          "rationale": "Both Assistant A and Assistant B provide a link to the CrateDB documentation as a reference.",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7369597008193794,
+            0.7131865509573186,
+            0.7429962500445247
+          ]
+        }
+      ]
+    },
+    {
+      "index": 19,
+      "input_text": "Shared file system implementation of the BlobStoreRepository",
+      "tags": [
+        "Shared File System",
+        "BlobStoreRepository"
+      ],
+      "output_text_a": "The shared file system implementation of the BlobStoreRepository allows for defining a custom directory path for storing blob data separately from normal data, which can be useful for optimizing storage based on different requirements. This feature is outlined in the documentation provided by CrateDB.",
+      "output_text_b": "The information provided does not mention a shared file system implementation of the BlobStoreRepository.",
+      "score": 1.5,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Assistant A provides a more helpful response by explaining what the shared file system implementation of the BlobStoreRepository does. Although it does not provide a code example or a direct link to the source, it does mention that this information can be found in the CrateDB documentation, which is somewhat helpful. \n\nOn the other hand, Assistant B does not provide any useful information or answer the user's question at all. It simply states that the information provided does not mention a shared file system implementation of the BlobStoreRepository, which does not help the user in any way.\n\nTherefore, Assistant A is the better assistant in this case. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Assistant A's response is not helpful as it does not provide any information or answer to the user's question. On the other hand, Assistant B provides a brief explanation of the shared file system implementation of the BlobStoreRepository, which is relevant and coherent. However, both assistants did not provide any runnable code, references, or links to sources of information. Despite this, Assistant B's response is more detailed and helpful compared to Assistant A's. Therefore, Assistant B is the better assistant in this case. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Assistant A provides a more helpful response by explaining what the shared file system implementation of the BlobStoreRepository does. Although it does not provide a code example or a direct link to the source, it does mention that this information can be found in the CrateDB documentation, which is somewhat helpful. \n\nOn the other hand, Assistant B does not provide any useful information. It simply states that the information provided does not mention a shared file system implementation of the BlobStoreRepository, which does not answer the user's question or provide any value.\n\nTherefore, Assistant A's response is more helpful, relevant, and coherent, even though it does not fully meet all the criteria outlined. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Assistant A's response is not helpful as it does not provide any information or answer to the user's question. On the other hand, Assistant B provides a brief explanation of the shared file system implementation of the BlobStoreRepository, making it more relevant, coherent, and helpful. However, neither of the assistants provided a runnable code, a reference to the source of the information, or a detailed answer. Despite this, Assistant B's response is more valuable to the user. Therefore, Assistant B is the better assistant in this case. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": false,
+          "score": 1.5,
+          "rationale": "Assistant A provides a more helpful and relevant response to the user's question. It explains what the shared file system implementation of the BlobStoreRepository does and why it might be useful. On the other hand, Assistant B simply states that the information provided does not mention a shared file system implementation of the BlobStoreRepository, which does not answer the user's question or provide any useful information. However, neither assistant provided a runnable code, a reference to the source, or a link to the documentation, which were some of the criteria mentioned. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": true,
+          "score": 1.5,
+          "rationale": "Assistant A's response is not helpful as it does not provide any information or answer to the user's question. On the other hand, Assistant B provides a brief explanation of the shared file system implementation of the BlobStoreRepository, making it more relevant and helpful. However, Assistant B does not provide a URL or any code, which were part of the evaluation criteria. Despite this, Assistant B's response is still more informative and useful than Assistant A's. Therefore, Assistant B is the better assistant in this case. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "Software engineer who is looking for information can copy and paste the code and it should work",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7647874664688068,
+            0.7332916272037397,
+            0.7705550824563614
+          ]
+        },
+        {
+          "rationale": "The answer is relevant to the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7783639369749266,
+            0.7778363965783741,
+            0.8768173110821089
+          ]
+        },
+        {
+          "rationale": "The answer links to the source of the information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7863665346146411,
+            0.7497948357468208,
+            0.8630212478940905
+          ]
+        },
+        {
+          "rationale": "The answer is coherent and makes sense",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7522703788083462,
+            0.761880239834368,
+            0.8553416500322922
+          ]
+        },
+        {
+          "rationale": "The answer is detailed and provides enough information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8479842921964492,
+            0.7563478912554099,
+            0.8538042841426003
+          ]
+        },
+        {
+          "rationale": "The answer is helpful and provides value",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7775276097455359,
+            0.7716336290122137,
+            0.8486875417099506
+          ]
+        },
+        {
+          "rationale": "The answer directly answers the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7684578920390149,
+            0.7547902612562366,
+            0.9661752193519281
+          ]
+        },
+        {
+          "rationale": "The answer contains code that can be copied and pasted",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7582418561647124,
+            0.7278829632793712,
+            0.8246710500946087
+          ]
+        },
+        {
+          "rationale": "The answer contains reference to the source in form of URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7711923350077402,
+            0.7300448070028118,
+            0.8217348901616565
+          ]
+        }
+      ]
+    },
+    {
+      "index": 20,
+      "input_text": "Is Cloud UI opensource?",
+      "tags": [
+        "Cloud UI",
+        "Open Source"
+      ],
+      "output_text_a": "No, according to the information provided, Cloud UI is not open-source. The platform mentioned in the context, CrateDB Cloud, focuses on delivering a platform that enhances the overall experience for users but does not mention Cloud UI being open-source. Instead, the emphasis is on delivering a managed SaaS solution without abandoning open-source values.",
+      "output_text_b": "No, Cloud UI is not open-source. It is part of the CrateDB Cloud platform, which is a managed service provided by Crate.io. You can find more information about it [here](https://cratedb.com/blog/introducing-scheduled-jobs-and-cloud-query-console).",
+      "score": -1.0,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided accurate and relevant responses to the user's question. They both clearly stated that Cloud UI is not open-source. However, Assistant B provided a reference link to the source of the information, which is a criterion for this evaluation. This makes Assistant B's response more grounded and helpful as it allows the user to verify the information or learn more about the topic. Therefore, Assistant B's response is superior in this case. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided accurate and relevant responses to the user's question. They both confirmed that Cloud UI is not open-source and is part of the CrateDB Cloud platform. However, Assistant A provided a direct link to the source of the information, which makes the answer more grounded and helpful for the user. Assistant B, on the other hand, provided a more detailed explanation but did not provide a direct link to the source of the information. Therefore, based on the criteria provided, Assistant A's response is more helpful and grounded. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided accurate and relevant responses to the user's question. They both clearly stated that Cloud UI is not open-source. However, Assistant B provided a link to the source of the information, which is a criterion for this evaluation. This makes Assistant B's response more grounded and helpful as it allows the user to verify the information or learn more about the topic. Therefore, Assistant B's response is superior in this case. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -0.0,
+          "rationale": "Both Assistant A and Assistant B provided accurate and relevant responses to the user's question. They both confirmed that Cloud UI is not open-source and is part of the CrateDB Cloud platform. However, Assistant A provided a direct link to the source of the information, which makes its response more grounded and helpful for the user. On the other hand, Assistant B's response was more detailed and coherent, explaining the nature of the CrateDB Cloud platform and its relationship with open-source values. Neither assistant provided a runnable code, which is not applicable in this context. Therefore, considering all the criteria, I would say it's a tie. \n\nFinal Verdict: [[C]]"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided accurate and relevant responses to the user's question. However, Assistant B's response was more helpful and detailed as it included a reference link for the user to get more information about the CrateDB Cloud platform. This makes Assistant B's response more grounded and helpful. Therefore, Assistant B's response is better in this case. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -0.0,
+          "rationale": "Both Assistant A and Assistant B provided accurate and relevant responses to the user's question. They both confirmed that Cloud UI is not open-source and explained that it is part of a managed service. However, Assistant A provided a direct link to the source of the information, which makes its response more grounded and helpful for the user. On the other hand, Assistant B's response was more detailed and coherent, explaining the philosophy behind CrateDB Cloud's approach to open-source. Therefore, both assistants have their strengths and weaknesses, but neither clearly outperforms the other. \n\nFinal Verdict: [[C]] for a tie."
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "The answer is relevant to the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7783811753190399,
+            0.7778932279982389,
+            0.8768195408425485
+          ]
+        },
+        {
+          "rationale": "The answer is coherent and makes sense",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7522619772316993,
+            0.7619894511552603,
+            0.8553100387536521
+          ]
+        },
+        {
+          "rationale": "The answer links to the source of the information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7863389601517908,
+            0.7498691758612023,
+            0.8630177329238176
+          ]
+        },
+        {
+          "rationale": "The answer is helpful and provides value",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7775391835562028,
+            0.7717095054186366,
+            0.848665609462008
+          ]
+        },
+        {
+          "rationale": "The answer directly answers the question",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7685093173174365,
+            0.7548369480542902,
+            0.9661763775117999
+          ]
+        },
+        {
+          "rationale": "The answer is detailed and provides enough information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8479926698085254,
+            0.7564455834156661,
+            0.85380284634863
+          ]
+        },
+        {
+          "rationale": "The answer contains code that can be copied and pasted",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7582656352854956,
+            0.7279592709448314,
+            0.8246959346547647
+          ]
+        },
+        {
+          "rationale": "The answer contains reference to the source in form of URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7711944816630822,
+            0.73016458458699,
+            0.8217464683488357
+          ]
+        }
+      ]
+    },
+    {
+      "index": 21,
+      "input_text": "How to do fusion search and connect vector search with fulltext search",
+      "tags": [
+        "Fusion Search",
+        "Vector Search",
+        "Fulltext Search"
+      ],
+      "output_text_a": "To perform fusion search and connect vector search with full-text search, you can utilize the advanced search capabilities offered by CrateDB. By combining vector, full-text, and keyword searches, you can achieve improved semantic similarity and keyword matching, enhancing search precision and relevance. This integration of different search techniques allows for a more comprehensive and efficient search experience. For more information, you can refer to the source [here](https://cratedb.com/solutions/vector-database).",
+      "output_text_b": "To do fusion search and connect vector search with full-text search, you can leverage advanced search capabilities offered by databases like CrateDB. These capabilities allow you to combine vector, full-text, and keyword searches for improved semantic similarity and keyword matching, enhancing search precision and relevance. By integrating vector search with full-text search, you can achieve a more comprehensive and efficient search experience, enabling better exploration, analysis, and information retrieval. You can learn more about this integration and its benefits in the blog post on [Advanced Search Capabilities by CrateDB](https://cratedb.com/solutions/vector-database).",
+      "score": -1.0,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": 0.0,
+          "rationale": "Both Assistant A and Assistant B provided similar responses to the user's question. They both suggested using CrateDB for fusion search and connecting vector search with full-text search, and they both provided a link to the same source for further information. Both responses were coherent, relevant, grounded, detailed, helpful, and direct. However, neither response included runnable code, which was one of the criteria for evaluation. Given these considerations, it's a tie between the two assistants. \n\nFinal Verdict: [[C]]"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both assistants provided relevant and coherent responses to the user's question. They both suggested using CrateDB's advanced search capabilities to perform fusion search and connect vector search with full-text search. They also both provided a link to the source of their information, which meets the 'grounded' and 'reference' criteria. However, neither assistant provided a runnable code, which was one of the criteria for evaluation. \n\nAssistant A's response was slightly more detailed, explaining the benefits of integrating vector search with full-text search, which makes it more helpful. Therefore, based on the criteria provided, Assistant A's response is slightly better.\n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": false,
+          "score": 0.0,
+          "rationale": "Both Assistant A and Assistant B provided similar responses to the user's question. They both suggested using CrateDB to perform fusion search and connect vector search with full-text search, and they both provided a link to the same source for further information. Both responses were coherent, relevant, grounded, detailed, helpful, and direct. However, neither response included runnable code, which was one of the criteria for evaluation. Given these considerations, I would say that both assistants performed equally well in answering the user's question. Therefore, my final verdict is: [[C]] for a tie."
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both assistants provided relevant, coherent, and helpful responses to the user's question. They both suggested using CrateDB's advanced search capabilities to perform fusion search and connect vector search with full-text search. They also both provided a link to the source of their information, which meets the 'reference' criterion. However, neither assistant provided runnable code, which was one of the criteria for evaluation. \n\nAssistant A's response was slightly more detailed, explaining the benefits of integrating vector search with full-text search, which makes it more helpful and direct. Therefore, Assistant A's response is slightly better.\n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both assistants provided similar responses, explaining how to perform fusion search and connect vector search with full-text search using CrateDB. Both responses are relevant, coherent, grounded, detailed, helpful, and direct. They both also provided a link to the source of the information. However, neither response provided runnable code that could be copied and pasted, which was one of the criteria for evaluation. Despite this, Assistant B's response was slightly more detailed and explanatory, providing a bit more context and explanation about the benefits of the integration. Therefore, Assistant B's response is slightly better. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided similar responses to the user's question. They both suggested using CrateDB's advanced search capabilities to perform fusion search and connect vector search with full-text search. They also both provided a link to CrateDB's website for further information. However, Assistant A's response was slightly more detailed and coherent, explaining the benefits of integrating vector search with full-text search in a more comprehensive manner. Therefore, Assistant A's response is more helpful and provides more value to the user. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "The answer is detailed and provides enough information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.8479842921964492,
+            0.7563478912554099,
+            0.8538042841426003
+          ]
+        },
+        {
+          "rationale": "The answer is coherent and makes sense",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7522703788083462,
+            0.761880239834368,
+            0.8553416500322922
+          ]
+        },
+        {
+          "rationale": "The answer is helpful and provides value",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7775276097455359,
+            0.7716336290122137,
+            0.8486875417099506
+          ]
+        },
+        {
+          "rationale": "The answer contains reference to the source in form of URL",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7711923350077402,
+            0.7300448070028118,
+            0.8217348901616565
+          ]
+        }
+      ]
+    },
+    {
+      "index": 22,
+      "input_text": "How to MATH fulltext Benchmarks of CrateDB",
+      "tags": [
+        "Fulltext Benchmarks",
+        "CrateDB"
+      ],
+      "output_text_a": "To measure the full-text search benchmark of CrateDB, you can refer to the robust full-text search capabilities and real-time indexing feature of CrateDB, which is built on top of Apache Lucene. More information on full-text search and real-time indexing in CrateDB can be found [here](https://cratedb.com/solutions/search-engine-database).",
+      "output_text_b": "To benchmark the full-text search capabilities of CrateDB, you can refer to the information provided on their solutions page about full-text search and real-time indexing. This feature allows for quick and accurate searches across various data types, including text, documents, and other unstructured data. The fully distributed query engine of CrateDB is built on top of Apache Lucene. You can find more information about this on their website [here](https://cratedb.com/solutions/search-engine-database).",
+      "score": -0.75,
+      "custom_fields": {},
+      "individual_rater_scores": [
+        {
+          "is_flipped": false,
+          "score": 0.0,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question. They both provided a link to the CrateDB website for more detailed information, which satisfies the 'reference' criterion. However, neither assistant provided runnable code, which was one of the criteria for evaluation. Both assistants were direct and helpful in their responses, providing information about CrateDB's full-text search capabilities and its use of Apache Lucene. The level of detail was similar in both responses. Therefore, considering all the criteria, it's a tie between the two assistants. \n\nFinal Verdict: [[C]]"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question. They both provided a link to the CrateDB website for more detailed information, which satisfies the 'reference' criterion. However, Assistant A's response is more detailed and provides more information about the full-text search capabilities of CrateDB, which makes it more helpful to the user. Neither assistant provided runnable code, but this was not necessary to answer the user's question. Therefore, based on the evaluation criteria, Assistant A provided a better response. \n\nFinal Verdict: [[A]]",
+          "rating_label": "A"
+        },
+        {
+          "is_flipped": false,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question. They both provided a link to the CrateDB website for more detailed information, satisfying the 'reference' criterion. Neither of them provided runnable code, but this is not applicable in this context as the user's question does not require a code-based answer. Both assistants were direct and helpful in their responses. However, Assistant B's response was slightly more detailed, providing additional information about the capabilities of CrateDB's full-text search and real-time indexing feature. Therefore, based on the criteria provided, Assistant B provided a slightly better response. \n\nFinal Verdict: [[B]]",
+          "rating_label": "B"
+        },
+        {
+          "is_flipped": true,
+          "score": -0.0,
+          "rationale": "Both Assistant A and Assistant B provided similar responses to the user's question. They both provided relevant information about CrateDB's full-text search capabilities and real-time indexing feature, and they both linked to the same source for more information. Neither assistant provided runnable code, but the question did not ask for any. Both responses were coherent, detailed, helpful, and direct. Therefore, it's a tie between the two assistants. \n\nFinal Verdict: [[C]]"
+        },
+        {
+          "is_flipped": false,
+          "score": 0.0,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question. They both provided a link to the CrateDB website for more detailed information, which satisfies the 'reference' criterion. However, neither of them provided runnable code, which is one of the criteria for evaluation. Both assistants were direct and helpful in their responses, providing the user with the necessary information to understand how to benchmark the full-text search capabilities of CrateDB. The level of detail was also similar in both responses. Therefore, based on the evaluation criteria, I would say it's a tie. \n\nFinal Verdict: [[C]]"
+        },
+        {
+          "is_flipped": true,
+          "score": -1.5,
+          "rationale": "Both Assistant A and Assistant B provided relevant and coherent responses to the user's question. They both provided a link to the CrateDB website for more detailed information, which satisfies the 'reference' criterion. However, neither assistant provided runnable code, which was one of the criteria for evaluation. Both assistants were direct and helpful in their responses, providing the user with a source to find more detailed information. \n\nIn terms of detail, Assistant A's response was slightly more detailed, explaining that CrateDB's full-text search feature allows for quick and accurate searches across various data types, including text, documents, and other unstructured data. This additional detail could be helpful to the user in understanding the capabilities of CrateDB's full-text search feature.\n\nTherefore, based on the criteria provided, Assistant A provided a slightly better response due to the additional detail provided. \n\nFinal verdict: [[A]]",
+          "rating_label": "A"
+        }
+      ],
+      "rationale_list": [
+        {
+          "rationale": "Assistant A provided a slightly more detailed response, explaining CrateDB's full-text search feature capabilities",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7675567144326161,
+            0.7424502870683234,
+            0.7688073448781831
+          ]
+        },
+        {
+          "rationale": "Assistant A and Assistant B both provided relevant and coherent responses",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7678524641132258,
+            0.7611474502019832,
+            0.8080017772463025
+          ]
+        },
+        {
+          "rationale": "Both Assistant A and Assistant B provided a link to the CrateDB website for more detailed information",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7813126999841655,
+            0.7453955583782519,
+            0.7598241055438667
+          ]
+        },
+        {
+          "rationale": "Neither Assistant A nor Assistant B provided runnable code",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7477890037225249,
+            0.7337258942904535,
+            0.7508756759526949
+          ]
+        },
+        {
+          "rationale": "Both Assistant A and Assistant B were direct and helpful in their responses",
+          "paraphrased_rationales": [],
+          "similarities": [
+            0.7601194594871737,
+            0.751402514500732,
+            0.835423036598865
+          ]
+        }
+      ]
+    }
+  ],
+  "rationale_clusters": [
+    {
+      "title": "provide more details"
+    },
+    {
+      "title": "is more engaging"
+    },
+    {
+      "title": "directly answers the question"
+    },
+    {
+      "title": "has more references"
+    },
+    {
+      "title": "has code examples"
+    }
+  ]
+}
