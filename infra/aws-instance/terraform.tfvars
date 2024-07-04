@@ -1,0 +1,8 @@
+aws_region = "eu-west-1"
+atlas_region = "EU_WEST_1"
+atlas_org_id = "668698de22fe377bf588fb85"
+atlas_project_name = "mongo-crate-cdc"
+environment = "dev"
+cluster_instance_size_name = "M10"
+cloud_provider = "AWS"
+mongodb_version = "6.0"

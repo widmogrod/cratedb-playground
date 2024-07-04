@@ -20,9 +20,13 @@ docker run -d -p 4200:4200 -p 4300:4300 -p 5432:5432 --env CRATE_HEAP_SIZE=1g cr
 ### AWS Infrastructure
 ```
 cd infra/aws-instance
-terafform init
+terraform init
 terraform plan
 terraform apply
+```
+
+```
+terraform output -json user_password
 ```
 
 
