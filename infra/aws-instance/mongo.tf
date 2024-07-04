@@ -26,13 +26,12 @@ resource "random_password" "db-user-password" {
 # Create Database IP Access List
 resource "mongodbatlas_project_ip_access_list" "ip" {
   project_id = mongodbatlas_project.atlas-project.id
-  ip_address = "0.0.0.0"
-#   ip_address = aws_instance.host.public_ip
+  ip_address = aws_instance.host.public_ip
 }
 
 resource "mongodbatlas_network_container" "test2" {
   project_id       = mongodbatlas_project.atlas-project.id
-  atlas_cidr_block = "10/8"
+  atlas_cidr_block = "10/21"
   provider_name    = "AWS"
   region_name      = var.atlas_region
 }
