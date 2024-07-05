@@ -39,6 +39,19 @@ variable "mongodb_version" {
   description = "MongoDB Version"
 }
 
+variable "mongodb_atlas_public_key" {
+  description = "Public API key to authenticate to Atlas"
+  type        = string
+}
+variable "mongodb_atlas_private_key" {
+  description = "Private API key to authenticate to Atlas"
+  type        = string
+}
+
+variable "atlas_vpc_cidr" {
+  type = string
+}
+
 
 variable "aws_region" {
   default = "eu-west-1"

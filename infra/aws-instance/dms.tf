@@ -19,7 +19,9 @@ resource "aws_dms_endpoint" "mongo_source" {
   engine_name   = "mongodb"
   username      = mongodbatlas_database_user.db-user.username
   password      = mongodbatlas_database_user.db-user.password
-  server_name   = regex("mongodb://([^,]+):", mongodbatlas_advanced_cluster.atlas-cluster.connection_strings.0.standard)[0]
+#   server_name   = mongodbatlas_advanced_cluster.atlas-cluster.connection_strings.0.standard
+  server_name   = regex("mongodb://([^/]+)/", mongodbatlas_advanced_cluster.atlas-cluster.connection_strings.0.standard)[0]
+#   server_name   = regex("mongodb://([^,]+):", mongodbatlas_advanced_cluster.atlas-cluster.connection_strings.0.standard)[0]
   port          = 27017
   database_name = "test"
 

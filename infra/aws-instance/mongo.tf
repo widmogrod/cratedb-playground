@@ -1,14 +1,14 @@
 # Create a Project
 resource "mongodbatlas_project" "atlas-project" {
   org_id = var.atlas_org_id
-  name = var.atlas_project_name
+  name   = var.atlas_project_name
 }
 
 # Create a Database User
 resource "mongodbatlas_database_user" "db-user" {
-  username = "user-1"
-  password = random_password.db-user-password.result
-  project_id = mongodbatlas_project.atlas-project.id
+  username           = "user-1"
+  password           = random_password.db-user-password.result
+  project_id         = mongodbatlas_project.atlas-project.id
   auth_database_name = "admin"
   roles {
     role_name     = "readWrite"
@@ -18,8 +18,8 @@ resource "mongodbatlas_database_user" "db-user" {
 
 # Create a Database Password
 resource "random_password" "db-user-password" {
-  length = 16
-  special = true
+  length           = 16
+  special          = true
   override_special = "_%@"
 }
 
@@ -31,7 +31,7 @@ resource "mongodbatlas_project_ip_access_list" "ip" {
 
 resource "mongodbatlas_network_container" "test2" {
   project_id       = mongodbatlas_project.atlas-project.id
-  atlas_cidr_block = "10/21"
+  atlas_cidr_block = var.atlas_vpc_cidr
   provider_name    = "AWS"
   region_name      = var.atlas_region
 }
@@ -54,12 +54,33 @@ resource "mongodbatlas_project_ip_access_list" "test" {
   depends_on = [mongodbatlas_network_peering.test]
 }
 
+resource "mongodbatlas_privatelink_endpoint" "test" {
+  project_id    = mongodbatlas_project.atlas-project.id
+  provider_name = "AWS"
+  region = var.atlas_region
+}
+
+resource "aws_vpc_endpoint" "ptfe_service" {
+  vpc_id             = aws_vpc.vpc.id
+  service_name       = mongodbatlas_privatelink_endpoint.test.endpoint_service_name
+  vpc_endpoint_type  = "Interface"
+  subnet_ids         = [aws_subnet.subnet_a.id, aws_subnet.subnet_b.id]
+  security_group_ids = [aws_security_group.dms.id, aws_security_group.public.id]
+}
+
+resource "mongodbatlas_privatelink_endpoint_service" "test" {
+  project_id          = mongodbatlas_privatelink_endpoint.test.project_id
+  private_link_id     = mongodbatlas_privatelink_endpoint.test.private_link_id
+  endpoint_service_id = aws_vpc_endpoint.ptfe_service.id
+  provider_name       = "AWS"
+}
+
 # Create an Atlas Advanced Cluster
 resource "mongodbatlas_advanced_cluster" "atlas-cluster" {
-  project_id = mongodbatlas_project.atlas-project.id
-  name = "${var.atlas_project_name}-${var.environment}-cluster"
-  cluster_type = "REPLICASET"
-  backup_enabled = false
+  project_id             = mongodbatlas_project.atlas-project.id
+  name                   = "${var.atlas_project_name}-${var.environment}-cluster"
+  cluster_type           = "REPLICASET"
+  backup_enabled         = false
   mongo_db_major_version = var.mongodb_version
   replication_specs {
     region_configs {
@@ -67,10 +88,10 @@ resource "mongodbatlas_advanced_cluster" "atlas-cluster" {
         instance_size = var.cluster_instance_size_name
         node_count    = 3
       }
-#       analytics_specs {
-#         instance_size = var.cluster_instance_size_name
-#         node_count    = 1
-#       }
+      #       analytics_specs {
+      #         instance_size = var.cluster_instance_size_name
+      #         node_count    = 1
+      #       }
       priority      = 7
       provider_name = var.cloud_provider
       region_name   = var.atlas_region
@@ -80,11 +101,13 @@ resource "mongodbatlas_advanced_cluster" "atlas-cluster" {
 
 
 # Outputs to Display
-output "atlas_cluster_connection_string" { value = mongodbatlas_advanced_cluster.atlas-cluster.connection_strings.0.standard_srv }
-output "ip_access_list"    { value = mongodbatlas_project_ip_access_list.ip.ip_address }
-output "project_name"      { value = mongodbatlas_project.atlas-project.name }
-output "username"          { value = mongodbatlas_database_user.db-user.username }
-output "user_password"     {
+output "atlas_cluster_connection_string" {
+  value = mongodbatlas_advanced_cluster.atlas-cluster.connection_strings.0.standard_srv
+}
+output "ip_access_list" { value = mongodbatlas_project_ip_access_list.ip.ip_address }
+output "project_name" { value = mongodbatlas_project.atlas-project.name }
+output "username" { value = mongodbatlas_database_user.db-user.username }
+output "user_password" {
   sensitive = true
-  value = mongodbatlas_database_user.db-user.password
+  value     = mongodbatlas_database_user.db-user.password
 }

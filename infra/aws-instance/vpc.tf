@@ -102,3 +102,21 @@ resource "aws_security_group" "dms" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+resource "aws_route" "primary-internet_access" {
+  route_table_id         = aws_vpc.vpc.main_route_table_id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.igw.id
+}
+
+resource "aws_route" "peeraccess" {
+  route_table_id            = aws_vpc.vpc.main_route_table_id
+  destination_cidr_block    = var.atlas_vpc_cidr
+  vpc_peering_connection_id = mongodbatlas_network_peering.test.connection_id
+  depends_on                = [aws_vpc_peering_connection_accepter.peer]
+}
+
+resource "aws_vpc_peering_connection_accepter" "peer" {
+  vpc_peering_connection_id = mongodbatlas_network_peering.test.connection_id
+  auto_accept               = true
+}
