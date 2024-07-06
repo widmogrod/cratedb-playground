@@ -4,11 +4,23 @@ resource "aws_instance" "host" {
   key_name        = "gh-dev-mac-studio"
 
   subnet_id       = aws_subnet.subnet_a.id
-  security_groups = [aws_security_group.public.id]
+  vpc_security_group_ids = [aws_security_group.public.id]
 
   tags = {
     Name = "cratedb-playground public instance"
   }
+
+  user_data = <<-EOF
+    #!/bin/bash
+    sudo apt-get update -y
+
+    sudo apt-get install gnupg
+    wget -qO- https://www.mongodb.org/static/pgp/server-7.0.asc | sudo apt-key add -
+
+    echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+    sudo apt-get update
+    sudo apt-get install -y mongodb-mongosh
+  EOF
 }
 
 output "instance_public_ip" {
