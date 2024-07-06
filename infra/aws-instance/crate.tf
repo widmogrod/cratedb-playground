@@ -33,10 +33,10 @@ module "cratedb-cluster" {
   vpc_id = aws_vpc.vpc.id
 
   # Applicable subnets of the VPC
-  subnet_ids = aws_subnet.subnet_a.*.id
+  subnet_ids = [aws_subnet.subnet_a.id,aws_subnet.subnet_b.id]
 
   # The corresponding availability zones of above subnets
-  availability_zones = aws_subnet.subnet_a.*.availability_zone
+  availability_zones = [aws_subnet.subnet_a.availability_zone, aws_subnet.subnet_b.availability_zone]
 
   # The SSH key pair for EC2 instances
   ssh_keypair = "gh-dev-mac-studio"
