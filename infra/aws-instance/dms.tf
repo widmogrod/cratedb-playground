@@ -43,6 +43,8 @@ resource "aws_dms_endpoint" "pg_destination" {
   engine_name   = "postgres"
   username      = module.cratedb-cluster.cratedb_username
   password      = module.cratedb-cluster.cratedb_password
+  // NOTE: currently vm_host and load balancer do not work, using IP fix connection
+  // but module.cratedb-cluster don't expose IPs so it's hard to get it
   server_name   = module.cratedb-cluster.utility_vm_host
   port          = 5432
   database_name = "postgres"
