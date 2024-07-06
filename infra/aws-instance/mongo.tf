@@ -65,7 +65,7 @@ resource "aws_vpc_endpoint" "ptfe_service" {
   service_name       = mongodbatlas_privatelink_endpoint.test.endpoint_service_name
   vpc_endpoint_type  = "Interface"
   subnet_ids         = [aws_subnet.subnet_a.id, aws_subnet.subnet_b.id]
-  security_group_ids = [aws_security_group.dms.id, aws_security_group.public.id]
+  security_group_ids = [aws_security_group.public.id]
 }
 
 resource "mongodbatlas_privatelink_endpoint_service" "test" {

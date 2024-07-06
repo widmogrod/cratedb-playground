@@ -65,7 +65,7 @@ resource "aws_route_table_association" "subnet_b_association" {
 
 resource "aws_security_group" "public" {
   name        = "cratedb-playground-public-sh"
-  description = "Allow SHH and HTTP traffic"
+  description = "Allow all traffic"
 
   vpc_id = aws_vpc.vpc.id
 
@@ -84,24 +84,24 @@ resource "aws_security_group" "public" {
   }
 }
 
-resource "aws_security_group" "dms" {
-  vpc_id = aws_vpc.vpc.id
-  name = "dms-sg"
-
-  ingress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
+# resource "aws_security_group" "dms" {
+#   vpc_id = aws_vpc.vpc.id
+#   name = "dms-sg"
+#
+#   ingress {
+#     from_port   = 0
+#     to_port     = 0
+#     protocol    = "-1"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+#
+#   egress {
+#     from_port   = 0
+#     to_port     = 0
+#     protocol    = "-1"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+# }
 
 resource "aws_route" "primary-internet_access" {
   route_table_id         = aws_vpc.vpc.main_route_table_id
