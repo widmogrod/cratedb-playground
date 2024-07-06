@@ -57,7 +57,7 @@ resource "mongodbatlas_project_ip_access_list" "test" {
 resource "mongodbatlas_privatelink_endpoint" "test" {
   project_id    = mongodbatlas_project.atlas-project.id
   provider_name = "AWS"
-  region = var.atlas_region
+  region        = var.atlas_region
 }
 
 resource "aws_vpc_endpoint" "ptfe_service" {
@@ -101,8 +101,14 @@ resource "mongodbatlas_advanced_cluster" "atlas-cluster" {
 
 
 # Outputs to Display
-output "atlas_cluster_connection_string" {
+output "atlas_cluster_connection_string_srv" {
   value = mongodbatlas_advanced_cluster.atlas-cluster.connection_strings.0.standard_srv
+}
+output "atlas_cluster_connection_string" {
+  value = mongodbatlas_advanced_cluster.atlas-cluster.connection_strings.0.standard
+}
+output "atlas_cluster_connection_private_string" {
+  value = mongodbatlas_advanced_cluster.atlas-cluster.connection_strings.0.private_endpoint
 }
 output "ip_access_list" { value = mongodbatlas_project_ip_access_list.ip.ip_address }
 output "project_name" { value = mongodbatlas_project.atlas-project.name }

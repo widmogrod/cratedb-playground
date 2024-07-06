@@ -1,4 +1,4 @@
-variable cidr_block {
+variable "cidr_block" {
   default = "10.0.0.0/16"
 }
 
@@ -19,23 +19,24 @@ resource "aws_internet_gateway" "igw" {
 }
 
 resource "aws_subnet" "subnet_a" {
-  vpc_id            = aws_vpc.vpc.id
-  cidr_block        = "10.0.1.0/24"
-  availability_zone = "${var.aws_region}a"
+  vpc_id                  = aws_vpc.vpc.id
+  cidr_block              = "10.0.1.0/24"
+  availability_zone       = "${var.aws_region}a"
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "cratedb-playground public subnet"
+    Name = "cratedb-playground subnet A"
   }
 }
 
 resource "aws_subnet" "subnet_b" {
-  vpc_id            = aws_vpc.vpc.id
-  cidr_block        = "10.0.2.0/24"
-  availability_zone = "${var.aws_region}b"
+  vpc_id                  = aws_vpc.vpc.id
+  cidr_block              = "10.0.2.0/24"
+  availability_zone       = "${var.aws_region}b"
+  map_public_ip_on_launch = false
 
   tags = {
-    Name = "cratedb-playground private subnet"
+    Name = "cratedb-playground subnet B"
   }
 }
 
@@ -49,7 +50,7 @@ resource "aws_route_table" "internet_traffic_rt" {
   }
 
   tags = {
-    Name = "cratedb-playground public route table"
+    Name = "cratedb-playground internet traffic route table"
   }
 }
 
