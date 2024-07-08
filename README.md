@@ -20,9 +20,13 @@ docker run -d -p 4200:4200 -p 4300:4300 -p 5432:5432 --env CRATE_HEAP_SIZE=1g cr
 ### AWS Infrastructure
 ```
 cd infra/aws-instance
-terafform init
+terraform init
 terraform plan
 terraform apply
+```
+
+```
+terraform output -json user_password
 ```
 
 
@@ -144,6 +148,9 @@ terraform apply
 - what and how BLOB tables work?
 - How AWS marketplace works, and why I cannot see deployment in my account?
 - How Cloud console
+- ```
+  WARNING: Java vector incubator module is not readable. For optimal vector performance, pass '--add-modules jdk.incubator.vector' to enable Vector API.
+  ```
 
 ## Other
 - What are limits of scalability?

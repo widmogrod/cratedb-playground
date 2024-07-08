@@ -1,4 +1,4 @@
-variable cidr_block {
+variable "cidr_block" {
   default = "10.0.0.0/16"
 }
 
@@ -18,24 +18,25 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
-resource "aws_subnet" "public_subnet" {
-  vpc_id            = aws_vpc.vpc.id
-  cidr_block        = "10.0.1.0/24"
-  availability_zone = "${var.aws_region}a"
+resource "aws_subnet" "subnet_a" {
+  vpc_id                  = aws_vpc.vpc.id
+  cidr_block              = "10.0.1.0/24"
+  availability_zone       = "${var.aws_region}a"
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "cratedb-playground public subnet"
+    Name = "cratedb-playground subnet A"
   }
 }
 
-resource "aws_subnet" "private_subnet" {
-  vpc_id            = aws_vpc.vpc.id
-  cidr_block        = "10.0.2.0/24"
-  availability_zone = "${var.aws_region}a"
+resource "aws_subnet" "subnet_b" {
+  vpc_id                  = aws_vpc.vpc.id
+  cidr_block              = "10.0.2.0/24"
+  availability_zone       = "${var.aws_region}b"
+  map_public_ip_on_launch = false
 
   tags = {
-    Name = "cratedb-playground private subnet"
+    Name = "cratedb-playground subnet B"
   }
 }
 
@@ -49,45 +50,30 @@ resource "aws_route_table" "internet_traffic_rt" {
   }
 
   tags = {
-    Name = "cratedb-playground public route table"
+    Name = "cratedb-playground internet traffic route table"
   }
 }
 
-resource "aws_route_table" "internal_traffic_rt" {
-  vpc_id = aws_vpc.vpc.id
-
-  tags = {
-    Name = "cratedb-playground internal traffic rt"
-  }
-}
-
-resource "aws_route_table_association" "public_subnet_association" {
-  subnet_id      = aws_subnet.public_subnet.id
+resource "aws_route_table_association" "subnet_a_association" {
+  subnet_id      = aws_subnet.subnet_a.id
   route_table_id = aws_route_table.internet_traffic_rt.id
 }
 
-resource "aws_route_table_association" "private_subnet_association" {
-  subnet_id      = aws_subnet.private_subnet.id
+resource "aws_route_table_association" "subnet_b_association" {
+  subnet_id      = aws_subnet.subnet_b.id
   route_table_id = aws_route_table.internet_traffic_rt.id
 }
 
 resource "aws_security_group" "public" {
   name        = "cratedb-playground-public-sh"
-  description = "Allow SHH and HTTP traffic"
+  description = "Allow all traffic"
 
   vpc_id = aws_vpc.vpc.id
 
   ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -99,3 +85,39 @@ resource "aws_security_group" "public" {
   }
 }
 
+# resource "aws_security_group" "dms" {
+#   vpc_id = aws_vpc.vpc.id
+#   name = "dms-sg"
+#
+#   ingress {
+#     from_port   = 0
+#     to_port     = 0
+#     protocol    = "-1"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+#
+#   egress {
+#     from_port   = 0
+#     to_port     = 0
+#     protocol    = "-1"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
+# }
+
+resource "aws_route" "primary-internet_access" {
+  route_table_id         = aws_vpc.vpc.main_route_table_id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.igw.id
+}
+
+resource "aws_route" "peeraccess" {
+  route_table_id            = aws_vpc.vpc.main_route_table_id
+  destination_cidr_block    = var.atlas_vpc_cidr
+  vpc_peering_connection_id = mongodbatlas_network_peering.test.connection_id
+  depends_on                = [aws_vpc_peering_connection_accepter.peer]
+}
+
+resource "aws_vpc_peering_connection_accepter" "peer" {
+  vpc_peering_connection_id = mongodbatlas_network_peering.test.connection_id
+  auto_accept               = true
+}

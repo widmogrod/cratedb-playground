@@ -14,7 +14,8 @@ echo "Setting environment variables in .env file"
 echo "export AWS_SECRET_ACCESS_KEY=123" > $envrc_file
 echo "export AWS_ACCESS_KEY_ID=123" >> $envrc_file
 echo "export AWS_DEFAULT_REGION=eu-west-1" >> $envrc_file
-
+echo "export MONGODB_ATLAS_PUBLIC_KEY=" >> $envrc_file
+echo "export MONGODB_ATLAS_PRIVATE_KEY=" >> $envrc_file
 
 echo "Human things to do:"
 echo "  0. cp .envrc.template .envrc"
